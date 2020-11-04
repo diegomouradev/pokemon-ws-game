@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ws-game"
+    }
+  },
+  "defaultProject": "ws-game",
+  "cli": {
+    "analytics": false
+  }
 }
