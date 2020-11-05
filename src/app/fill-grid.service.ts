@@ -13,8 +13,8 @@ export class FillGridService {
   gridSize: number = this.values.GRID_SIZE;
   words: string[] = this.values.WORD_SAMPLE;
   
-  wordSample: {} = this.generateWordsSample();
-  insertionMap: object[] = this.generateInsertionMap();
+  
+  
 
   constructor() { }
 
@@ -69,28 +69,33 @@ generateInsertionMap() {
           let randomBinary = Math.floor((Math.random() * 10) % 2 );
           randomBinary === 0 ?  direction = 'directionLR' : direction = 'directionTB';
         }
-      insertionMap.push([ row , column , direction ]);
+      insertionMap.push({ row , column , direction });
     }
     return insertionMap;
   }
 
   // Access the empty grid to insert the random words generated (API)
   insertWords(grid) {
-    let numberOfWords = this.numberOfWords;
-    let insertionMap = this.insertionMap;
-    let wordSample = this.wordSample;
+    let numberOfWords: number = this.numberOfWords;
+    let insertionMap: {} = this.generateInsertionMap();
+    let wordSample: {} = this.generateWordsSample();
     grid.map( function(row, index) {
       for (let i = 0; i < numberOfWords; i++) {
-        let indexPositionRow = insertionMap[i][0];
-        let indexPositionColumn = insertionMap[i][1];
-        if (index === indexPositionRow){
+        let indexPositionRow = insertionMap[i].row;
+        let indexPositionColumn = insertionMap[i].column;
+        let insertionDirection = insertionMap[i].direction;
+        if (index === indexPositionRow && insertionDirection === 'directionLR') {
           for (let j = 0; j < 5; j++) {
-            row[indexPositionColumn + j][0] = wordSample[0].name.substring(j, j + 1);
+            row[indexPositionColumn + j][0] = wordSample[i].name.substring(j, j + 1);
+          } 
+        } else if (index === indexPositionRow && insertionDirection === 'directionTB') {
+            for (let j = 0; j < 5; j++) {
+              grid[index + j][0] = wordSample[i].name.substring(j, j + 1);
+            }
           }
         }
-      }
       return row;
-    });
-    return grid;
-  }
+    })
+  };
+  
 }
