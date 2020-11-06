@@ -6,41 +6,38 @@ import { Constants } from 'src/app/constants';
   providedIn: 'root'
 })
 export class FillGridService {
-  
-  values = new Constants();
-  numberOfWords: number = this.values.NUMBER_OF_WORDS;
+  grid: object[] = []
+
+  values = new Constants()
+  numberOfWords: number = this.values.NUMBER_OF_WORDS
   wordSize: number = this.values.WORD_SIZE
-  gridSize: number = this.values.GRID_SIZE;
-  words: string[] = this.values.WORD_SAMPLE;
-  
-  
-  
+  gridSize: number = this.values.GRID_SIZE
+  words: string[] = this.values.WORD_SAMPLE
+
+  wordSample: object[] = []
+  insertionMap: object[] = []
+  watchIndex: number[] = []
 
   constructor() { }
 
   // Generate a matrix of empty tiles.
-  generateGrid()  {
-    let grid = [];
+  generateGrid(): void  {
+
     for(let i=0; i < this.gridSize; i++) {
-      grid[i] = [];
+      this.grid[i] = [];
       for(let j=0; j< this.gridSize; j++) {
-        grid[i][j] = ['_'];
+        this.grid[i][j] = [];
       }
     }
-    
-    return grid;
   }
 
   // Generate Array of sample words as objects.
   // if words are provided as array of strings.
-  generateWordsSample(): object[] {
-    return this.words.map( function(word) {
-      const wordSample: object = {
-        name: word,
-        
-      }
-      return new Object(wordSample);
-    });
+  generateWordsSample(): void {
+    for(let word of this.words){
+      let pokName = {name: word} 
+      this.wordSample.push(pokName);
+    };
   }
 
 // Generate random positions corresponding to the first letter of the word
@@ -48,14 +45,13 @@ export class FillGridService {
 // based on the [x,y] indexes + the size of grid, and the size of the word, to avoid
 // having words getting cut at the board limit.
 // Obs: Probably should account for words not crossing over each-other!
-generateInsertionMap() {
+generateInsertionMap(): void {
   // the limiting index for a word to start on the grid
   //  otherwise it won't fit.
   const limit = this.gridSize - this.wordSize;
-  const insertionMap = [];
   for( let i = 0; i < this.numberOfWords; i++ ){
-    const row = Math.floor(Math.random() * (this.gridSize - i) + i);
-    const column = Math.floor(Math.random() * (this.gridSize - i) + i);
+    const row: number = this.randomIndex();
+    const column: number = this.randomIndex();
     let direction;
     // direction checking to make sure words fit without being cut 
     // on the limits of the board.
@@ -66,36 +62,47 @@ generateInsertionMap() {
       } else if ( column > limit && row < limit ) {
         direction = 'directionTB'
         } else {
-          let randomBinary = Math.floor((Math.random() * 10) % 2 );
-          randomBinary === 0 ?  direction = 'directionLR' : direction = 'directionTB';
+          let randomBinary = Math.floor(Math.random() * (this.gridSize + i) - i);
+          randomBinary % 2 === 0 ?  direction = 'directionLR' : direction = 'directionTB';
         }
-      insertionMap.push({ row , column , direction });
+      this.insertionMap.push({ row , column , direction });
     }
-    return insertionMap;
+  }
+
+  // Helper function that generates a random index based on the gridSize.
+  randomIndex(): number {
+    let randomIndex: number = Math.floor(Math.random() * this.gridSize);
+    if(!this.watchIndex.length) {
+      this.watchIndex.push(randomIndex);
+      return randomIndex;
+    }
+    for(const index of this.watchIndex) {
+      if (index === (randomIndex || (randomIndex + this.wordSize))) {
+        this.randomIndex();
+      }
+      this.watchIndex.push(randomIndex);
+      return randomIndex;
+    }
   }
 
   // Access the empty grid to insert the random words generated (API)
-  insertWords(grid) {
-    let numberOfWords: number = this.numberOfWords;
-    let insertionMap: {} = this.generateInsertionMap();
-    let wordSample: {} = this.generateWordsSample();
-    grid.map( function(row, index) {
-      for (let i = 0; i < numberOfWords; i++) {
-        let indexPositionRow = insertionMap[i].row;
-        let indexPositionColumn = insertionMap[i].column;
-        let insertionDirection = insertionMap[i].direction;
-        if (index === indexPositionRow && insertionDirection === 'directionLR') {
-          for (let j = 0; j < 5; j++) {
-            row[indexPositionColumn + j][0] = wordSample[i].name.substring(j, j + 1);
+  insertWords(): object[] {
+      for (let i = 0; i < this.numberOfWords; i++) {
+        let indexPositionRow = this.insertionMap[i].row;
+        let indexPositionColumn = this.insertionMap[i].column;
+        let insertionDirection = this.insertionMap[i].direction;
+
+        if (indexPositionRow === indexPositionRow && insertionDirection === 'directionLR') {
+          for (let j = 0; j < this.wordSize; j++) {
+            this.grid[indexPositionRow][indexPositionColumn + j] = this.wordSample[i].name.substring(j, j + 1);
           } 
-        } else if (index === indexPositionRow && insertionDirection === 'directionTB') {
-            for (let j = 0; j < 5; j++) {
-              grid[index + j][0] = wordSample[i].name.substring(j, j + 1);
+        } else if (indexPositionRow === indexPositionRow && insertionDirection === 'directionTB') {
+            for (let j = 0; j < this.wordSize; j++) {
+              this.grid[indexPositionRow + j][indexPositionColumn] = this.wordSample[i].name.substring(j, j + 1);
             }
           }
         }
-      return row;
-    })
+    return this.grid;
   };
   
 }

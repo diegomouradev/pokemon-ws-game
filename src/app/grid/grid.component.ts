@@ -8,21 +8,23 @@ import { FillGridService } from '../fill-grid.service';
   providers: [FillGridService]
 })
 export class GridComponent implements OnInit {
-  grid;
   gameGrid;
   
   constructor(private FillGridService: FillGridService) {
-    this.generateGrid();
-    this.gameGrid = this.FillGridService.insertWords(this.grid);
+    this.FillGridService.generateGrid();
+    this.FillGridService.generateWordsSample();
+    this.FillGridService.generateInsertionMap();
+    this.insertWords();
   }
 
   ngOnInit(): void {
-    
   }
   
-  generateGrid(): GridComponent {
-    this.grid = this.FillGridService.generateGrid();
-    
+
+  insertWords(): GridComponent {
+    this.gameGrid = this.FillGridService.insertWords();
     return this;
   }
+
+  
 }
