@@ -12,14 +12,12 @@ export class GridComponent implements OnInit {
   
   constructor(private FillGridService: FillGridService) {
     this.FillGridService.generateGrid();
-    this.FillGridService.generateWordsSample();
     this.FillGridService.generateInsertionMap();
     this.insertWords();
   }
 
   ngOnInit(): void {
   }
-  
 
   insertWords(): GridComponent {
     this.gameGrid = this.FillGridService.insertWords();
