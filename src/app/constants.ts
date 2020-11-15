@@ -1,5 +1,3 @@
-
-
 // Const declaration
 export const GRID_WIDTH: number = 20;
 export const GRID_HEIGHT: number = 20;
@@ -9,7 +7,6 @@ export const DIRECTIONS: string[] = [
   'vertical',
   'diagonal'
 ]
-  // hard coded, but should be changed for an API in the future.
 export const WORD_LIST: string[] = [
   'Ditto',
   'Arbok',
@@ -25,6 +22,6 @@ export const WORD_LIST: string[] = [
   'Squirtle',
   'Charmander'
 ];
-
+export const ALPHABET: string = 'abcdefghijklmnoprstuvwy'
 
 

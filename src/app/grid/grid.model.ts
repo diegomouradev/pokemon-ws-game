@@ -1,6 +1,3 @@
-export class Grid { 
-}
-
 export interface IBoardGenerator {
 	generateBoard(gridSize: number, wordList: string[]): ITile[][];
 }

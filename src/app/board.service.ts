@@ -8,7 +8,6 @@ import { IBoardGenerator, ITile } from './grid/grid.model';
 export class BoardService implements IBoardGenerator{
 
   constructor(private readonly DiegoGridService: FillGridService) { 
-    
   }
   generateBoard(gridSize: number, wordList: string[]): ITile[][] {
     return this.DiegoGridService.generateBoard(gridSize, wordList);
