@@ -37,7 +37,7 @@ export class FillGridService {
     return randomWord[0];
   }
   
- // y|* * *
+  // y|* * *
   // y|    
   // y|    *
   // y|    *
@@ -88,8 +88,7 @@ export class FillGridService {
   }
 
   // If the result of isDirectionValid returns false.
-  changeDirections: object = {
-    // stat looking from indexColumn 0 at the next row.
+  skipTiles: object = {
     horizontal: (indexColumn: number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 1}),
     vertical: (indexColumn: number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 100}),
     diagonal: ( indexColumn:number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 1})
@@ -125,7 +124,7 @@ export class FillGridService {
             indexRow++;
           }
         } else {
-          let skipDirection = this.changeDirections[direction];
+          let skipDirection = this.skipTiles[direction];
           skipDirection = skipDirection(indexColumn, indexRow, wordLength);
           indexColumn = skipDirection.indexColumn;
           indexRow = skipDirection.indexRow;

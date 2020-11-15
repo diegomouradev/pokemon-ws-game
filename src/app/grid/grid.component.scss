@@ -15,7 +15,14 @@
     padding: 0.2rem 0.1rem 0.2rem 0.2rem;
     margin: 0.1rem;
     border: 0.1rem solid #eaf8bf;
-    background-color: #eca400 ;
+    background-color: #eca400;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+      background-color:  #eaf8bf;
+      border: 0.1rem solid #eca400;
+      transform: scale(110%);
+    }
 
     &--content {
       text-transform: uppercase;

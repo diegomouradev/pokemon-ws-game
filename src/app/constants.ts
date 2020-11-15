@@ -18,7 +18,11 @@ export class Constants {
     'Ekans',
     'Pichu',
     'Aipom',
-    'Duduo'
+    'Duduo',
+    'Pikachu',
+    'bubasaur',
+    'Squirtle',
+    'Charmander'
   ];
 
 
