@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITile } from '../grid/grid.model'
 
 @Component({
-  selector: 'grid-tile',
+  selector: 'app-tile',
   templateUrl: './tile.component.html',
   styleUrls: ['./tile.component.scss']
 })

@@ -7,9 +7,14 @@ export interface IBoardGenerator {
 
 export interface ITile {
 	letter: string;
+  indexRow?: number;
+  indexColumn?: number;
+  isSelected?: boolean;
+  isWord?: boolean;
+}
+
+export interface ILocation {
   indexRow: number;
   indexColumn: number;
-  isSelected: boolean;
-  isWord: boolean;
-  isRandom: boolean;
+  direction: string;
 }

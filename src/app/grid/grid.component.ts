@@ -1,29 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FillGridService } from '../fill-grid.service';
-import { IBoardGenerator } from './grid.model'
+import { GRID_SIZE, WORD_LIST } from '../constants';
+import { BoardService } from '../board.service';
+import { IBoardGenerator, ITile } from './grid.model'
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
-  providers: [FillGridService]
+  providers: [BoardService]
 })
 export class GridComponent implements OnInit {
-  gameGrid;
+  gameGrid: ITile[][];
+ 
 
-  constructor(private FillGridService: FillGridService) {
-    this.FillGridService.generateGrid();
-    this.FillGridService.placeWord();
+  constructor(private BoardService: BoardService) {
   }
 
   ngOnInit(): void {
-    this.insertWords();
-  }
-
-  insertWords(): GridComponent {
-    this.gameGrid = this.FillGridService.grid;
-    return this;
-  }
-
-  
+    this.gameGrid = this.BoardService.generateBoard(GRID_SIZE, WORD_LIST);
+  }  
 }
