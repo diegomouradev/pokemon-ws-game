@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FillGridService } from '../fill-grid.service';
+import { IBoardGenerator } from './grid.model'
 
 @Component({
   selector: 'app-grid',
@@ -9,18 +10,18 @@ import { FillGridService } from '../fill-grid.service';
 })
 export class GridComponent implements OnInit {
   gameGrid;
-  
+
   constructor(private FillGridService: FillGridService) {
     this.FillGridService.generateGrid();
-    this.FillGridService.generateInsertionMap();
-    this.insertWords();
+    this.FillGridService.placeWord();
   }
 
   ngOnInit(): void {
+    this.insertWords();
   }
 
   insertWords(): GridComponent {
-    this.gameGrid = this.FillGridService.insertWords();
+    this.gameGrid = this.FillGridService.grid;
     return this;
   }
 

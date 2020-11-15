@@ -14,12 +14,15 @@
     height: 3rem;
     padding: 0.2rem 0.1rem 0.2rem 0.2rem;
     margin: 0.1rem;
-    border: 0.1rem solid black;
+    border: 0.1rem solid #eaf8bf;
+    background-color: #eca400 ;
 
     &--content {
+      text-transform: uppercase;
       font-family: sans-serif;
       font-size: 2rem;
-      color: black;
+      color: #001d4a;
+      text-shadow: 0.1rem 0.1rem 0.1rem #27476e;
     }
 
   }
