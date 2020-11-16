@@ -16,6 +16,7 @@ export class FillGridService implements IBoardGenerator {
   directions: string[] = DIRECTIONS
   
   constructor() { }
+  
   generateBoard(gridSize: number, wordList: string[]): ITile[][] {
     this.words = wordList;
     this.gridSize = gridSize;

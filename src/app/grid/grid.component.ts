@@ -15,7 +15,7 @@ export class GridComponent implements OnInit {
 
   constructor(private BoardService: BoardService) {
   }
-
+/* testing */
   ngOnInit(): void {
     this.gameGrid = this.BoardService.generateBoard(GRID_SIZE, WORD_LIST);
   }  

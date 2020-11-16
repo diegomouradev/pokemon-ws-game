@@ -18,7 +18,7 @@ export const WORD_LIST: string[] = [
   'Aipom',
   'Duduo',
   'Pikachu',
-  'bubasaur',
+  'bulbasaur',
   'Squirtle',
   'Charmander'
 ];
