@@ -3,6 +3,7 @@ import { GRID_SIZE, WORD_LIST } from '../constants';
 import { BoardService } from '../board.service';
 import { IBoardGenerator, ITile } from './grid.model'
 
+
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -15,9 +16,8 @@ export class GridComponent implements OnInit {
 
   constructor(private BoardService: BoardService) {
   }
-/* testing */
+  
   ngOnInit(): void {
     this.gameGrid = this.BoardService.generateBoard(GRID_SIZE, WORD_LIST);
   }  
-  /* test 2 */
 }

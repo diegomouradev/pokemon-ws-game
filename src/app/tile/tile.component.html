@@ -1,1 +1,6 @@
-<span class="tile__content">{{tile.letter}}</span>
+<div class="grid__tile" [ngClass]="{'grid__tile--selected': tile.isSelected}" (click)="toggleTile($event)">
+  <span [ngClass]="{'is-word': tile.isWord} "class="tile__content">
+    {{tile.letter}}
+  </span>
+</div>
+

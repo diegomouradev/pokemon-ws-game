@@ -1,5 +1,7 @@
-<div class="grid__row" *ngFor="let row of gameGrid">
-  <div class="grid__tile" *ngFor="let tile of row">
-    <span class="grid__tile--content">{{tile.letter}}</span>
+<div class="grid">
+  <div class="grid__row" *ngFor="let row of gameGrid">
+    <div *ngFor="let tile of row">
+     <grid-tile [tile]="tile" ></grid-tile>
+    </div>
   </div>
 </div>

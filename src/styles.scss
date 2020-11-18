@@ -1,8 +1,15 @@
+// Variables
+$black: #000000;
+$white: #FFFFFF;
+$dark-grey: #333333;
+$medium-grey: #5e5e5e;
+$light-grey: #aaaaaa;
+
 /* You can add global styles to this file, and also import other style files */
 html {
   font-size: 62.5%; // 1rem = 10px
 }
 
 body {
-  background-color: #dcdcdd;
+  background-color:$white;
 }
