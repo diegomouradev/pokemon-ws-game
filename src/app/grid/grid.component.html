@@ -1,10 +1,6 @@
 <div class="grid__row" *ngFor="let row of gameGrid">
   <div *ngFor="let tile of row">
-    <grid-tile (onTileSelected)="checkForWord($event)" [tile]="tile" >
-
-    </grid-tile>
+    <grid-tile (onTileSelected)="checkForWord($event)" [tile]="tile" ></grid-tile>
   </div>
 </div>
-<grid-list class="app__list">
-  
-</grid-list>
+
