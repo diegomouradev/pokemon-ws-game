@@ -24,7 +24,7 @@ export class TileComponent implements OnInit {
   }
 
   toggleTile() {
-		if (this.tile.isSelected && typeof this.tile.letterPosition !== 'number') {
+		if (this.tile.isSelected && typeof this.tile.letterPosition !== 'number' && this.tile.isWord) {
 			this.tile.isSelected = this.tile.isSelected;
 		} else {
 			this.tile.isSelected = !this.tile.isSelected;
