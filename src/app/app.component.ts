@@ -8,7 +8,7 @@ import { IList } from './grid/grid.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Pokemon Catcher';
+  title = 'Pokemon Word Search';
   
 
 }
