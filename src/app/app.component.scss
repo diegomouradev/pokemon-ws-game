@@ -4,3 +4,20 @@ h1 {
   text-align: center;
   color: #001d4a;
 }
+
+.app {
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__grid {
+    padding: 1rem;
+  }
+
+  &__list {
+    padding: 1rem;
+  }
+}

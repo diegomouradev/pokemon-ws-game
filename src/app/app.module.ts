@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GridComponent } from './grid/grid.component';
 import { TileComponent } from './tile/tile.component';
+import { ListComponent } from './list/list.component';
 
 
 
@@ -12,7 +13,8 @@ import { TileComponent } from './tile/tile.component';
   declarations: [
     AppComponent,
     GridComponent,
-    TileComponent
+    TileComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,

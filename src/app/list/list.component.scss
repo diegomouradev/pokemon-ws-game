@@ -1,0 +1,15 @@
+.word-list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  font-family: sans-serif;
+  font-size: 2rem;
+  color: black;
+  margin-bottom: 1rem;
+
+  &__completed {
+    text-decoration: line-through;
+  }
+}

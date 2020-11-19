@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GRID_SIZE, WORD_LIST } from '../constants';
 import { BoardService } from '../board.service';
-import { IBoardGenerator, ITile } from './grid.model'
+import { IBoardGenerator, IList, ITile } from './grid.model'
 
 
 @Component({
@@ -12,8 +12,11 @@ import { IBoardGenerator, ITile } from './grid.model'
 })
 export class GridComponent implements OnInit {
   gameGrid: ITile[][];
+  wordList: IList[]= WORD_LIST;
   word: string[] = [];
-  wordList = WORD_LIST;
+
+  @Output()
+  onWordFound = new EventEmitter<IList[]>();
 
   constructor(private BoardService: BoardService) {
   }
@@ -21,6 +24,7 @@ export class GridComponent implements OnInit {
   ngOnInit(): void {
     this.gameGrid = this.BoardService.generateBoard(GRID_SIZE, WORD_LIST);
   }  
+
 
   checkForWord($event): void {
     if($event.isWord) {
@@ -32,13 +36,17 @@ export class GridComponent implements OnInit {
         this.word[$event.letterPosition] = $event.letter;
       }
       const wordToCheck: string = this.word.join('');
-      for(let [i,word] of this.wordList.entries()) {
-        if(wordToCheck === word ) {
-          alert(`You caught a wild ${word}`);
-          console.log(`You caught a wild ${word}`);
+      
+      for(let [i,iWord] of this.wordList.entries()) {
+        if( wordToCheck === iWord.word ) {
+          iWord.completed = true;
+
+          alert(`You caught a wild ${iWord.word}`);
+          
           this.word = []
         }
       }
     }
+    this.onWordFound.emit(this.wordList);
   }
 }

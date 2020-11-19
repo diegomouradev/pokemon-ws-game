@@ -1,5 +1,5 @@
 export interface IBoardGenerator {
-	generateBoard(gridSize: number, wordList: string[]): ITile[][];
+	generateBoard(gridSize: number, wordList: IList[]): ITile[][];
 }
 
 export interface ITile {
@@ -18,4 +18,10 @@ export interface ILocation {
   indexColumn: number;
   direction: string;
   overlap: number;
+}
+
+export interface IList {
+  word: string;
+  index?: number;
+  completed: boolean;
 }

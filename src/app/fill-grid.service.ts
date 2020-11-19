@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WORD_LIST, GRID_WIDTH, GRID_HEIGHT, DIRECTIONS, ALPHABET, GRID_SIZE } from './constants';
 import { TileComponent } from './tile/tile.component';
-import { ITile , IBoardGenerator, ILocation  } from './grid/grid.model';
+import { ITile , IBoardGenerator, ILocation, IList  } from './grid/grid.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class FillGridService implements IBoardGenerator {
   grid: ITile[][] = []
   
   alphabet: string = ALPHABET
-  words: string[] = WORD_LIST
+  words: IList[] = WORD_LIST
   gridWidth: number = GRID_WIDTH
   gridHeight: number = GRID_HEIGHT
   gridSize: number = GRID_SIZE
@@ -20,7 +20,7 @@ export class FillGridService implements IBoardGenerator {
 
   constructor() { }
   
-  generateBoard(gridSize: number, wordList: string[]): ITile[][] {
+  generateBoard(gridSize: number, wordList: IList[]): ITile[][] {
     this.words = wordList;
     this.gridSize = gridSize;
     this.generateGrid();
@@ -60,18 +60,18 @@ export class FillGridService implements IBoardGenerator {
     }
   }
   
-  getWord(): string {
-    let sortedWords = this.words.sort( (a,b) => b.length - a.length  );
+  getWord(): IList {
+    let sortedWords = this.words.sort( (a,b) => (b.word.length) - (a.word.length));
     let getOneWord = sortedWords[this.wordCounter];
     this.wordCounter++;
     return getOneWord;
   }
 
   // Find all available locations to place the word in every direction.
-  getAvailableLocations(word): ILocation[] {
+  getAvailableLocations(iWord: IList): ILocation[] {
 
     const locations: ILocation[] = [];
-    const wordLength = word.length;
+    const wordLength = iWord.word.length;
     let biggestOverlap = 0;
 
     for( let j = 0; j < this.directions.length; j++){
@@ -87,7 +87,7 @@ export class FillGridService implements IBoardGenerator {
         // check if the word fits in the space available at all.
         if(checkDirection(this.gridWidth, this.gridHeight, indexColumn, indexRow, wordLength )) {
           // If it fits, check the next tile for the length of the word to make sure words don't overlap.
-          let overlap = this.checkForOverlap(word, indexColumn, indexRow, nextTile);
+          let overlap = this.checkForOverlap(iWord, indexColumn, indexRow, nextTile);
 
           if(overlap >= biggestOverlap || overlap === 0) {
             biggestOverlap = overlap;
@@ -110,14 +110,14 @@ export class FillGridService implements IBoardGenerator {
     return this.optimizeOverlaps(locations, biggestOverlap);
   };
 
-  checkForOverlap( word, indexColumn, indexRow, getNextTile ): number {
+  checkForOverlap( iWord, indexColumn, indexRow, getNextTile ): number {
     let overlap: number = 0;
 
-    for(let k = 0; k < word.length; k++) {
+    for(let k = 0; k < iWord.word.length; k++) {
       let nextTile = getNextTile( indexColumn, indexRow, k );
       let tile = this.grid[nextTile.indexRow][nextTile.indexColumn];
 
-      if (tile.letter === word[k]) {
+      if (tile.letter === iWord.word[k]) {
         overlap++;
       }  else if (tile.letter !== '_') {
         return -1;
@@ -140,35 +140,35 @@ export class FillGridService implements IBoardGenerator {
     let length = this.words.length;
     while(length) {
       
-      const word: string = this.getWord();
+      const iWord: IList = this.getWord();
       
-      const locations = this.getAvailableLocations(word);
+      const locations = this.getAvailableLocations(iWord);
       
       const randomLocation: ILocation = locations[Math.floor(Math.random() * locations.length)];
       
-      this.placeWordInGrid( word, randomLocation);
+      this.placeWordInGrid( iWord, randomLocation);
 
       length--;
     }
     return this.grid;
   }
   
-  placeWordInGrid( word: string, randomLocation: ILocation ): void {
-    for (let i = 0, length = word.length; i < length; i++) {
+  placeWordInGrid( iWord: IList, randomLocation: ILocation ): void {
+    for (let i = 0, length = iWord.word.length; i < length; i++) {
       let next = this.nextTile[randomLocation.direction];
       next = next(randomLocation.indexColumn, randomLocation.indexRow, i);
-      let tile = this.buildTile(word, next, i);
+      let tile = this.buildTile(iWord, next, i);
       this.grid[next.indexRow][next.indexColumn] = tile;
     }
     
   };
 
-  buildTile(word, next, i): ITile {
+  buildTile(iWord, next, i): ITile {
 
-    if(this.grid[next.indexRow][next.indexColumn].letter === word[i]) {
+    if(this.grid[next.indexRow][next.indexColumn].letter === iWord.word[i]) {
       let previousLetterPosition = this.grid[next.indexRow][next.indexColumn].letterPosition;
       const tile: ITile = {
-        letter: word[i],
+        letter: iWord.word[i],
         indexRow: next.indexRow,
         indexColumn: next.indexColumn,
         isWord: true, 
@@ -178,7 +178,7 @@ export class FillGridService implements IBoardGenerator {
       return tile;
     } else {
       const tile: ITile = {
-        letter: word[i],
+        letter: iWord.word[i],
         indexRow: next.indexRow,
         indexColumn: next.indexColumn,
         isWord: true, 
