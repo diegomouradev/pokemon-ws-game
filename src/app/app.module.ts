@@ -7,6 +7,9 @@ import { GridComponent } from './grid/grid.component';
 import { TileComponent } from './tile/tile.component';
 import { ListComponent } from './list/list.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { InlineSVGModule } from 'ng-inline-svg';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { ListComponent } from './list/list.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule, 
+    InlineSVGModule.forRoot({baseUrl: 'https://res.cloudinary.com/djot2xc6w/image/upload/v1605884902/pokemon/'}),
   ],
   providers: [],
   bootstrap: [AppComponent]

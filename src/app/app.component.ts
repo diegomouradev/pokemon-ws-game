@@ -7,5 +7,4 @@ import { IList } from './grid/grid.model';
 })
 export class AppComponent {
   title = 'Pokemon Word Search';
-
 }

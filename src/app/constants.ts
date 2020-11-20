@@ -16,9 +16,9 @@ export const WORD_LIST: IList[] = [
   {word:'Entei', completed:false},
   {word:'Gloom', completed:false},
   {word:'Ekans', completed:false},
-  {word:'Pichu', completed:false},
-  {word:'Aipom', completed:false},
-  {word:'Duduo', completed:false},
+  {word:'pichu', completed:false},
+  {word:'Chikorita  ', completed:false},
+  {word:'duduo', completed:false},
   {word:'Pikachu', completed:false},
   {word:'Bulbasaur', completed:false},
   {word:'Squirtle', completed:false},
@@ -27,7 +27,7 @@ export const WORD_LIST: IList[] = [
   {word:'Mug', completed:false},
   {word:'Miltang', completed:false},
   {word:'Snorlax', completed:false},
-  {word:'Gyarados', completed:false},
+  {word:'mew', completed:false},
   {word:'Blastoise', completed:false}
 ];
 export const ALPHABET: string = 'abcdefghijklmnoprstuvwy'

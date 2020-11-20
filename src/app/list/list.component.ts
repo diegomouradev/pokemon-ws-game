@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { WORD_LIST } from '../constants';
 import { IList } from '../grid/grid.model';
 
@@ -9,11 +9,14 @@ import { IList } from '../grid/grid.model';
 })
 export class ListComponent implements OnInit {
   wordList: IList[] = WORD_LIST;
- 
+
+
   @Input()
   iWord: IList;
+  removeSVGAttributes: string[]
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }

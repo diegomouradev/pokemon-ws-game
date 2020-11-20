@@ -8,18 +8,37 @@ h2 {
 .word-list {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .list-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
   font-family: sans-serif;
   font-size: 2rem;
   color: black;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin: 2rem;
 
   &__completed {
     text-decoration: line-through;
   }
+}
+
+.list-icon {
+  width: 5rem;
+  height: auto;
+  margin-right: 1rem;
+}
+
+svg {
+  width: 5rem;
+  height: auto;
 }
 
