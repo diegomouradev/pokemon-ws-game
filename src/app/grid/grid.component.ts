@@ -41,7 +41,7 @@ export class GridComponent implements OnInit {
         if( wordToCheck === iWord.word ) {
           iWord.completed = true;
 
-          alert(`You caught a wild ${iWord.word}`);
+          console.log(`You caught a wild ${iWord.word}`);
           
           this.word = []
         }

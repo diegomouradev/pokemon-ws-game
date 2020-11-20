@@ -207,3 +207,5 @@ export class FillGridService implements IBoardGenerator {
     return randomLetter;
   }
 };
+
+// Implement check to exclude words that don't fit in the grid.
