@@ -1,5 +1,4 @@
 <h2>Catch them all</h2>
-
 <ul class="word-list">
   <li class="list-item" (onWordFound)="markWordFound($event)" [ngClass]="{'list-item__completed': iWord.completed}" *ngFor="let iWord of wordList">{{iWord.word}}</li>
 </ul>
