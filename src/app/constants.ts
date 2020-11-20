@@ -17,7 +17,7 @@ export const WORD_LIST: IList[] = [
   {word:'Gloom', completed:false},
   {word:'Ekans', completed:false},
   {word:'pichu', completed:false},
-  {word:'Chikorita  ', completed:false},
+  {word:'Chikorita', completed:false},
   {word:'duduo', completed:false},
   {word:'Pikachu', completed:false},
   {word:'Bulbasaur', completed:false},

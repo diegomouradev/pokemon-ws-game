@@ -1,7 +1,6 @@
-<h2>Catch them all</h2>
 <ul class="word-list">
-  <li class="list-item" (onWordFound)="markWordFound($event)" [ngClass]="{'list-item__completed': iWord.completed}"  *ngFor="let iWord of wordList, let index=index">
-    <div class="list-icon" [removeSVGAttributes]="['width', 'height']" [inlineSVG]="iWord.word + '.svg'"></div>
+  <li class="list-item" (onWordFound)="markWordFound($event)" [class.list-item__completed]="iWord.completed"  *ngFor="let iWord of wordList">
+    <div class="list-icon" [removeSVGAttributes]="['width', 'height']" [inlineSVG]="iWord.word +'.svg'"></div>
     <span>{{iWord.word}}</span>
   </li>
 </ul>

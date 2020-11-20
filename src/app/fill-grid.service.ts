@@ -164,29 +164,21 @@ export class FillGridService implements IBoardGenerator {
   };
 
   buildTile(iWord, next, i): ITile {
+    let tile: ITile = {
+      letter: iWord.word[i],
+      indexRow: next.indexRow,
+      indexColumn: next.indexColumn,
+      isWord: true, 
+      isSelected: false
+    };
 
-    if(this.grid[next.indexRow][next.indexColumn].letter === iWord.word[i]) {
+    if ( this.grid[next.indexRow][next.indexColumn].letter === iWord.word[i] ) {
       let previousLetterPosition = this.grid[next.indexRow][next.indexColumn].letterPosition;
-      const tile: ITile = {
-        letter: iWord.word[i],
-        indexRow: next.indexRow,
-        indexColumn: next.indexColumn,
-        isWord: true, 
-        isSelected: false,
-        letterPosition: [previousLetterPosition, i]
-      };
-      return tile;
+      tile.letterPosition = [previousLetterPosition, i];
     } else {
-      const tile: ITile = {
-        letter: iWord.word[i],
-        indexRow: next.indexRow,
-        indexColumn: next.indexColumn,
-        isWord: true, 
-        isSelected: false,
-        letterPosition: i
-      };
-      return tile;
+      tile.letterPosition = i;
     }
+    return tile;
   }
   
   fillEmptySpots(): void {
