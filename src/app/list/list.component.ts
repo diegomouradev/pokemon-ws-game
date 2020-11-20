@@ -9,7 +9,7 @@ import { IList } from '../grid/grid.model';
 })
 export class ListComponent implements OnInit {
   wordList: IList[] = WORD_LIST;
-
+ 
   @Input()
   iWord: IList;
 
