@@ -1,13 +1,14 @@
+@import '/src/styles.scss';
 
 h2 {
-  font-family: sans-serif;
+  font-family: $default;
   font-size: 3rem;
   text-align: center;
 }
 .app {
 
   &__title {
-    font-family: sans-serif;
+    font-family: $default;
     font-size: 5rem;
     text-align: center;
   }
@@ -15,10 +16,13 @@ h2 {
   &__container {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   &__grid {
-    padding: 3rem;
+    border: 0.2rem solid $black;
+    padding: 0rem;
+    margin: 3rem;
   }
 
   &__list {

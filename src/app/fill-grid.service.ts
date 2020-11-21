@@ -23,7 +23,7 @@ export class FillGridService implements IBoardGenerator {
   generateBoard(gridSize: number, wordList: IList[]): ITile[][] {
     this.words = wordList;
     this.gridSize = gridSize;
-    this.generateGrid();
+    this.generateGrid(this.gridWidth, this.gridHeight, this.grid);
     this.placeWord();
     this.fillEmptySpots();
     return this.grid;
@@ -51,13 +51,14 @@ export class FillGridService implements IBoardGenerator {
   }
   
   // Generate grid of empty tiles.
-  generateGrid(): void {
-    for(let i=0; i < this.gridHeight; i++) {
-      this.grid.push([]);
-      for(let j=0; j< this.gridWidth; j++) {
-        this.grid[i].push({letter:'_', isWord: false});
+  generateGrid(gridWidth, gridHeight, grid): ITile[][] {
+    for(let i=0; i < gridHeight; i++) {
+      grid.push([]);
+      for(let j=0; j< gridWidth; j++) {
+        grid[i].push({letter:'_', isWord: false});
       }
     }
+    return grid;
   }
   
   getWord(): IList {
@@ -69,7 +70,6 @@ export class FillGridService implements IBoardGenerator {
 
   // Find all available locations to place the word in every direction.
   getAvailableLocations(iWord: IList): ILocation[] {
-
     const locations: ILocation[] = [];
     const wordLength = iWord.word.length;
     let biggestOverlap = 0;

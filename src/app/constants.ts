@@ -10,25 +10,28 @@ export const DIRECTIONS: string[] = [
   'diagonal'
 ]
 export const WORD_LIST: IList[] = [
-  {word:'Ditto', completed:false},
-  {word:'Arbok', completed:false},
-  {word:'Eevee', completed:false},
-  {word:'Entei', completed:false},
-  {word:'Gloom', completed:false},
-  {word:'Ekans', completed:false},
+  {word:'ditto', completed:false},
+  {word:'arbok', completed:false},
+  {word:'eevee', completed:false},
+  {word:'entei', completed:false},
+  {word:'gloom', completed:false},
+  {word:'ekans', completed:false},
   {word:'pichu', completed:false},
-  {word:'Chikorita', completed:false},
+  {word:'chikorita', completed:false},
   {word:'duduo', completed:false},
-  {word:'Pikachu', completed:false},
-  {word:'Bulbasaur', completed:false},
-  {word:'Squirtle', completed:false},
-  {word:'Charmander', completed:false},
-  {word:'Charizard', completed:false},
-  {word:'Mug', completed:false},
-  {word:'Miltang', completed:false},
-  {word:'Snorlax', completed:false},
+  {word:'pikachu', completed:false},
+  {word:'bulbasaur', completed:false},
+  {word:'squirtle', completed:false},
+  {word:'charmander', completed:false},
+  {word:'charizard', completed:false},
+  {word:'mug', completed:false},
+  {word:'miltang', completed:false},
+  {word:'snorlax', completed:false},
   {word:'mew', completed:false},
-  {word:'Blastoise', completed:false}
+  {word:'togepi', completed:false},
+  {word:'gyarados', completed:false},
+  {word:'clefairy', completed:false},
+  {word:'blastoise', completed:false}
 ];
 export const ALPHABET: string = 'abcdefghijklmnoprstuvwy'
 

@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* You can add global styles to this file, and also import other style files */
+
 // Variables
 $black: #000000;
 $white: #FFFFFF;
 $dark-grey: #333333;
 $medium-grey: #5e5e5e;
 $light-grey: #aaaaaa;
+$default: 'Press Start 2P', cursive;
 
-/* You can add global styles to this file, and also import other style files */
 html {
+  font-family: $default;
   font-size: 62.5%; // 1rem = 10px
 }
 
