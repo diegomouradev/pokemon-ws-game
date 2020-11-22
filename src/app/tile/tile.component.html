@@ -1,4 +1,3 @@
-<div class="grid__tile tile__content" [ngClass]="{'grid__tile--selected': tile.isSelected, 'is-word': tile.isWord}" (click)="toggleTile()">
+<div class="grid__tile tile__content" [class.grid__tile--selected]="tile.isSelected" [class.grid__tile--highlight-start]="tile.highlightStart" (click)="toggleTile()">
   {{tile.letter}}
 </div>
-

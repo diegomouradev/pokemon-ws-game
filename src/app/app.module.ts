@@ -22,7 +22,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
-    InlineSVGModule.forRoot({baseUrl: 'https://res.cloudinary.com/djot2xc6w/image/upload/v1605884902/pokemon/'}),
+    InlineSVGModule.forRoot({baseUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/'}),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { WORD_LIST } from '../constants';
+import { POKEMON, WORD_LIST } from '../constants';
 import { IList } from '../grid/grid.model';
+
 
 @Component({
   selector: 'grid-list',
@@ -9,14 +10,14 @@ import { IList } from '../grid/grid.model';
 })
 export class ListComponent implements OnInit {
   wordList: IList[] = WORD_LIST;
-
+  
 
   @Input()
   iWord: IList;
   removeSVGAttributes: string[]
+  pokemons: object = POKEMON;
 
-  constructor() { 
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

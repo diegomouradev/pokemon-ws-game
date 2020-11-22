@@ -1,6 +1,11 @@
 <ul class="word-list">
   <li class="list-item" (onWordFound)="markWordFound($event)" [class.list-item__completed]="iWord.completed"  *ngFor="let iWord of wordList">
-    <div class="list-icon" [removeSVGAttributes]="['width', 'height']" [inlineSVG]="iWord.word +'.svg'"></div>
+    <div class="list-icon" [removeSVGAttributes]="['width', 'height']" [inlineSVG]="''+ iWord.id +'.svg'"></div>
     <span>{{iWord.word}}</span>
   </li>
 </ul>
+
+<!-- <ul>
+  <li *ngFor="let pokemon of pokemons">
+    {{pokemon.name}}</li>
+</ul> -->

@@ -17,3 +17,9 @@ html {
 body {
   background-color:$white;
 }
+
+.app {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

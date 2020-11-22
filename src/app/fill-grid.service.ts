@@ -32,22 +32,28 @@ export class FillGridService implements IBoardGenerator {
   // Given the direction calculates the next Square.
   nextTile: object = {
     horizontal: ( indexColumn: number,indexRow: number, distance:number) => ( {indexColumn: indexColumn + distance, indexRow } ),
+    horizontalReversed: ( indexColumn: number,indexRow: number, distance:number ) => ( { indexColumn: indexColumn - distance, indexRow } ),
     vertical: ( indexColumn: number,indexRow: number, distance:number) => ( { indexColumn , indexRow: indexRow  + distance } ),
-    diagonal: ( indexColumn: number,indexRow: number, distance:number) => ( { indexColumn: indexColumn + distance, indexRow: indexRow + distance})
+    verticalReversed: ( indexColumn: number,indexRow: number, distance:number) => ( { indexColumn , indexRow: indexRow  - distance } ),
+    diagonal: ( indexColumn: number,indexRow: number, distance:number) => ( { indexColumn: indexColumn + distance, indexRow: indexRow + distance}),
   }
 
   // given the grid dimensions, and the tile position check if the word fits.
   isDirectionValid: object = {
     horizontal: ( width: number, height: number, indexColumn:number, indexRow:number, wordLength:number ) => width >= indexColumn + wordLength,
+    horizontalReversed: ( width: number, height: number, indexColumn:number, indexRow:number, wordLength:number ) => indexColumn + 1 >= wordLength,
     vertical: ( width: number, height: number, indexColumn:number, indexRow:number, wordLength:number ) => height >= indexRow + wordLength,
+    verticalReversed: ( width: number, height: number, indexColumn:number, indexRow:number, wordLength:number ) => indexRow + 1 >= wordLength,
     diagonal: ( width: number, height: number, indexColumn:number, indexRow:number, wordLength:number ) => (width >= indexColumn + wordLength) && (height >= indexRow + wordLength)
   }
 
   // If the result of isDirectionValid returns false.
   skipTiles: object = {
     horizontal: (indexColumn: number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 1}),
+    horizontalReversed: (indexColumn: number, indexRow: number, wordLength: number) => ({indexColumn: wordLength - 1, indexRow: indexRow}),
     vertical: (indexColumn: number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 100}),
-    diagonal: ( indexColumn:number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 1})
+    verticalReversed: (indexColumn: number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: wordLength - 1 }),
+    diagonal: ( indexColumn:number, indexRow: number, wordLength: number) => ({indexColumn: indexColumn = 0, indexRow: indexRow + 1}),
   }
   
   // Generate grid of empty tiles.
@@ -86,7 +92,7 @@ export class FillGridService implements IBoardGenerator {
       while( indexRow < this.gridHeight) {
         // check if the word fits in the space available at all.
         if(checkDirection(this.gridWidth, this.gridHeight, indexColumn, indexRow, wordLength )) {
-          // If it fits, check the next tile for the length of the word to make sure words don't overlap.
+          
           let overlap = this.checkForOverlap(iWord, indexColumn, indexRow, nextTile);
 
           if(overlap >= biggestOverlap || overlap === 0) {
@@ -138,16 +144,13 @@ export class FillGridService implements IBoardGenerator {
 
   placeWord(): ITile[][] {
     let length = this.words.length;
+    
     while(length) {
-      
       const iWord: IList = this.getWord();
-      
       const locations = this.getAvailableLocations(iWord);
-      
       const randomLocation: ILocation = locations[Math.floor(Math.random() * locations.length)];
       
       this.placeWordInGrid( iWord, randomLocation);
-
       length--;
     }
     return this.grid;
