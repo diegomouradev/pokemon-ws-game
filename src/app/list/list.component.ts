@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class ListComponent implements OnInit {
   wordList: IList[] = WORD_LIST;
-  pokeApi: any;
+  pokeApi: DPokemon;
 
   @Input()
   iWord: IList;
