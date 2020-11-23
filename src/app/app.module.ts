@@ -9,6 +9,7 @@ import { ListComponent } from './list/list.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
+import { WordgameComponent } from './wordgame/wordgame.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
     AppComponent,
     GridComponent,
     TileComponent,
-    ListComponent
+    ListComponent,
+    WordgameComponent
   ],
   imports: [
     BrowserModule,
