@@ -44,6 +44,8 @@ export class GridComponent implements OnInit {
           console.log(`You caught a wild ${iWord.word}`);
           
           this.word = []
+        } else if($event.letterPosition === 0){
+          $event.highlightStart = true;
         }
       }
     }

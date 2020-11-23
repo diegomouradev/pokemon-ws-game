@@ -14,12 +14,14 @@ export class ListComponent implements OnInit {
   @Input()
   iWord: IList;
   removeSVGAttributes: string[]
+  
 
   constructor() { 
   }
 
   ngOnInit(): void {
   }
+
 
   markWordFound($event) {
     this.wordList = $event;

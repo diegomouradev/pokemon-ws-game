@@ -15,8 +15,10 @@ h2 {
 
   &__container {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    width: 90vw;
   }
 
   &__grid {

@@ -10,19 +10,22 @@ import { ListComponent } from './list/list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 
+import { WsGameComponent } from './ws-game/ws-game.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     GridComponent,
     TileComponent,
-    ListComponent
+    ListComponent,
+    WsGameComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, 
-    InlineSVGModule.forRoot({baseUrl: 'https://res.cloudinary.com/djot2xc6w/image/upload/v1605884902/pokemon/'}),
+    InlineSVGModule.forRoot({baseUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/'}),
   ],
   providers: [],
   bootstrap: [AppComponent]

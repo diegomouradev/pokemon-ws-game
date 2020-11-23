@@ -8,9 +8,8 @@ export interface ITile {
   indexColumn?: number;
   isSelected?: boolean;
   isWord?: boolean;
-  // isStartOrEnd?: string;
-  // change the name and pass in a zero indexed base number for accurate checking
   letterPosition?: number | number[];
+  highlightStart?: boolean;
 }
 
 export interface ILocation {
@@ -22,6 +21,6 @@ export interface ILocation {
 
 export interface IList {
   word: string;
-  index?: number;
+  id?: string;
   completed: boolean;
 }
