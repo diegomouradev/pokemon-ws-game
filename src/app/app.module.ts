@@ -9,7 +9,8 @@ import { ListComponent } from './list/list.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
-import { WordgameComponent } from './wordgame/wordgame.component';
+
+import { WsGameComponent } from './ws-game/ws-game.component';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { WordgameComponent } from './wordgame/wordgame.component';
     GridComponent,
     TileComponent,
     ListComponent,
-    WordgameComponent
+    WsGameComponent
   ],
   imports: [
     BrowserModule,

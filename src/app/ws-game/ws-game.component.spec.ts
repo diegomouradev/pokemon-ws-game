@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordgameComponent } from './wordgame.component';
+import { WsGameComponent } from './ws-game.component';
 
-describe('WordgameComponent', () => {
-  let component: WordgameComponent;
-  let fixture: ComponentFixture<WordgameComponent>;
+describe('WsGameComponent', () => {
+  let component: WsGameComponent;
+  let fixture: ComponentFixture<WsGameComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WordgameComponent ]
+      declarations: [ WsGameComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WordgameComponent);
+    fixture = TestBed.createComponent(WsGameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
