@@ -12,9 +12,7 @@ export class PokemonService {
   
   //from Bulbasaur to Mew.
   pokemonsFirstGen: Observable<IPokemonData>;
-
   constructor(private http: HttpClient) {
-    
   }
 
   getPokemonsFirstGen(): Observable<IPokemonData> {

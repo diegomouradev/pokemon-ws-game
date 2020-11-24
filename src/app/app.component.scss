@@ -12,23 +12,4 @@ h2 {
     font-size: 5rem;
     text-align: center;
   }
-
-  &__container {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: flex-start;
-    width: 90vw;
-  }
-
-  &__grid {
-    border: 0.2rem solid $black;
-    padding: 0rem;
-    margin: 3rem;
-  }
-
-  &__list {
-    padding: 3rem;
-    
-  }
 }

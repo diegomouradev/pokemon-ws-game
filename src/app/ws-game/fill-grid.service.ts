@@ -152,7 +152,7 @@ export class FillGridService implements IBoardGenerator {
     while(length) {
       const iWord: IWordList = this.getWord();
       const locations = this.getAvailableLocations(iWord);
-      if(locations.length < 3){
+      if(locations.length > 3){
         const randomLocation: ILocation = locations[Math.floor(Math.random() * locations.length)];
         this.placeWordInGrid( iWord, randomLocation);
       } else {
