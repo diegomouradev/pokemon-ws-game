@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { WORD_LIST } from '../constants';
-import { ITile } from '../grid/grid.model'
+import { ITile } from '../ws-game.models'
 
 @Component({
   selector: 'grid-tile',

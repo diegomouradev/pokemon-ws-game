@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { FillGridService } from './fill-grid.service';
 import { GRID_HEIGHT, GRID_SIZE, GRID_WIDTH } from 'src/app/constants';
-import { IList, ITile } from 'src/app/grid/grid.model'
+import { IList, ITile } from 'src/app/ws-game/grid/grid.model'
 
 describe('FillGridService', () => {
   let service: FillGridService;

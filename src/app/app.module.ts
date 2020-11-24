@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GridComponent } from './grid/grid.component';
-import { TileComponent } from './tile/tile.component';
-import { ListComponent } from './list/list.component';
+import { GridComponent } from './ws-game/grid/grid.component';
+import { TileComponent } from './ws-game/tile/tile.component';
+import { ListComponent } from './ws-game/list/list.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';

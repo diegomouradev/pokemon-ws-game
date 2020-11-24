@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
-import { WORD_LIST, GRID_WIDTH, GRID_HEIGHT, DIRECTIONS, ALPHABET, GRID_SIZE } from './constants';
-import { TileComponent } from './tile/tile.component';
-import { ITile , IBoardGenerator, ILocation, IList  } from './grid/grid.model';
+import { IWordList, ITile , IBoardGenerator, ILocation } from './ws-game.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FillGridService implements IBoardGenerator {
-  grid: ITile[][] = []
-  
-  alphabet: string = ALPHABET
-  words: IList[] = WORD_LIST
-  gridWidth: number = GRID_WIDTH
-  gridHeight: number = GRID_HEIGHT
-  gridSize: number = GRID_SIZE
-  directions: string[] = DIRECTIONS
-  
-  wordCounter: number = 0
+  ALPHABET: string = 'abcdefghijklmnoprstuvwy';
+  DIRECTIONS: string[] = [
+    'horizontal',
+    'horizontalReversed',
+    'vertical',
+    'verticalReversed',
+    'diagonal'
+  ];
+
+  grid: ITile[][] = [];
+  words: IWordList;
+  gridWidth: number;
+  gridHeight: number;
+  wordCounter: number = 0;
 
   constructor() { }
   
-  generateBoard(gridSize: number, wordList: IList[]): ITile[][] {
-    this.words = wordList;
-    this.gridSize = gridSize;
-    this.generateGrid(this.gridWidth, this.gridHeight, this.grid);
+  generateBoard(gridWidth: number, gridHeight:number, pokemonList: IWordList): ITile[][] {
+    this.words = pokemonList;
+    this.gridWidth = gridWidth;
+    this.gridHeight = gridHeight;
+
+    this.generateGrid(gridWidth, gridHeight, this.grid);
     this.placeWord();
     this.fillEmptySpots();
     return this.grid;
@@ -67,7 +71,7 @@ export class FillGridService implements IBoardGenerator {
     return grid;
   }
   
-  getWord(): IList {
+  getWord(): IWordList {
     let sortedWords = this.words.sort( (a,b) => (b.word.length) - (a.word.length));
     let getOneWord = sortedWords[this.wordCounter];
     this.wordCounter++;
@@ -75,14 +79,14 @@ export class FillGridService implements IBoardGenerator {
   }
 
   // Find all available locations to place the word in every direction.
-  getAvailableLocations(iWord: IList): ILocation[] {
+  getAvailableLocations(iWord: IWordList): ILocation[] {
     const locations: ILocation[] = [];
     const wordLength = iWord.word.length;
     let biggestOverlap = 0;
 
-    for( let j = 0; j < this.directions.length; j++){
+    for( let j = 0; j < this.DIRECTIONS.length; j++){
 
-      const direction = this.directions[j];
+      const direction = this.DIRECTIONS[j];
       const checkDirection = this.isDirectionValid[direction];
       const nextTile = this.nextTile[direction];
       let indexColumn = 0;
@@ -146,17 +150,20 @@ export class FillGridService implements IBoardGenerator {
     let length = this.words.length;
     
     while(length) {
-      const iWord: IList = this.getWord();
+      const iWord: IWordList = this.getWord();
       const locations = this.getAvailableLocations(iWord);
-      const randomLocation: ILocation = locations[Math.floor(Math.random() * locations.length)];
-      
-      this.placeWordInGrid( iWord, randomLocation);
+      if(locations.length < 3){
+        const randomLocation: ILocation = locations[Math.floor(Math.random() * locations.length)];
+        this.placeWordInGrid( iWord, randomLocation);
+      } else {
+        return this.grid;
+      }
       length--;
     }
     return this.grid;
   }
   
-  placeWordInGrid( iWord: IList, randomLocation: ILocation ): void {
+  placeWordInGrid( iWord: IWordList, randomLocation: ILocation ): void {
     for (let i = 0, length = iWord.word.length; i < length; i++) {
       let next = this.nextTile[randomLocation.direction];
       next = next(randomLocation.indexColumn, randomLocation.indexRow, i);
@@ -197,8 +204,8 @@ export class FillGridService implements IBoardGenerator {
   };
 
   pickRandomLetter(): string {
-    const letterIndex = Math.floor(Math.random() * this.alphabet.length);
-    const randomLetter = this.alphabet[letterIndex];
+    const letterIndex = Math.floor(Math.random() * this.ALPHABET.length);
+    const randomLetter = this.ALPHABET[letterIndex];
     return randomLetter;
   }
 };

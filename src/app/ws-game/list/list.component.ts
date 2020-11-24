@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { WORD_LIST } from '../constants';
-import { IList } from '../grid/grid.model';
+import { IWordList } from '../ws-game.models';
 
 @Component({
   selector: 'grid-list',
@@ -8,11 +7,9 @@ import { IList } from '../grid/grid.model';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  wordList: IList[] = WORD_LIST;
-
-
+  
   @Input()
-  iWord: IList;
+  pokemonList: IWordList[];
   removeSVGAttributes: string[]
   
 
@@ -22,9 +19,10 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
 
   markWordFound($event) {
-    this.wordList = $event;
+    this.pokemonList = $event;
   }
 
 }
