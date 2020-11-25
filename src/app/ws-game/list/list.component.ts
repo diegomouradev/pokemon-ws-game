@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FillGridService } from '../fill-grid.service';
 import { IWordList } from '../ws-game.models';
 
 @Component({
@@ -7,22 +8,29 @@ import { IWordList } from '../ws-game.models';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  
+
+
   @Input()
-  pokemonList: IWordList[];
+  displayList: IWordList[];
   removeSVGAttributes: string[]
   
 
   constructor() { 
+    
   }
+  @Output()
+  generateNewGameBoard = new EventEmitter();
+
 
   ngOnInit(): void {
   }
 
-  
+  onButtonClicked() {
+    this.generateNewGameBoard.emit(this.displayList);
+  }
 
   markWordFound($event) {
-    this.pokemonList = $event;
+    this.displayList = $event;
   }
 
 }

@@ -11,7 +11,11 @@ export class GridComponent implements OnInit {
 
   @Input()
   gameBoard: ITile[][];
-  wordList: IWordList[];
+  
+  @Input()
+  displayList: IWordList[];
+  
+  @Input()
   tile: ITile;
 
   @Output()
@@ -35,7 +39,7 @@ export class GridComponent implements OnInit {
       }
       const wordToCheck: string = this.word.join('');
       
-      for(let [i,iWord] of this.wordList.entries()) {
+      for(let iWord of this.displayList) {
         if( wordToCheck === iWord.word ) {
           iWord.isCompleted = true;
 
@@ -47,6 +51,6 @@ export class GridComponent implements OnInit {
         }
       }
     }
-    this.onWordFound.emit(this.wordList);
+    this.onWordFound.emit(this.displayList);
   }
 }

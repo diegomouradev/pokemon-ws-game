@@ -15,14 +15,15 @@ export class FillGridService implements IBoardGenerator {
   ];
 
   grid: ITile[][] = [];
-  words: IWordList;
+  words: IWordList[];
   gridWidth: number;
   gridHeight: number;
-  wordCounter: number = 0;
+  public displayList: IWordList[] = [];
+
 
   constructor() { }
   
-  generateBoard(gridWidth: number, gridHeight:number, pokemonList: IWordList): ITile[][] {
+  generateBoard(gridWidth: number, gridHeight:number, pokemonList: IWordList[]): ITile[][] {
     this.words = pokemonList;
     this.gridWidth = gridWidth;
     this.gridHeight = gridHeight;
@@ -73,9 +74,21 @@ export class FillGridService implements IBoardGenerator {
   
   getWord(): IWordList {
     let sortedWords = this.words.sort( (a,b) => (b.word.length) - (a.word.length));
-    let getOneWord = sortedWords[this.wordCounter];
-    this.wordCounter++;
+    let getOneWord = sortedWords[0];
+    sortedWords = sortedWords.splice(0,1)
     return getOneWord;
+  }
+
+  generateDisplayList(iWord) {
+    this.displayList.push(iWord);
+  }
+
+  setDisplayList(displayList){
+    this.words.splice(displayList.length)
+  }
+
+  getDisplayList(): IWordList[] {
+    return this.displayList;
   }
 
   // Find all available locations to place the word in every direction.
@@ -152,14 +165,18 @@ export class FillGridService implements IBoardGenerator {
     while(length) {
       const iWord: IWordList = this.getWord();
       const locations = this.getAvailableLocations(iWord);
-      if(locations.length > 3){
+
+      if(locations.length > 0){
         const randomLocation: ILocation = locations[Math.floor(Math.random() * locations.length)];
         this.placeWordInGrid( iWord, randomLocation);
+        this.generateDisplayList(iWord);
       } else {
+        // this.generateDisplayList(iWord); I HAVE IT WRONGLY PLACE HERE AS WELL
         return this.grid;
       }
       length--;
     }
+    
     return this.grid;
   }
   

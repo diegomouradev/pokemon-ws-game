@@ -14,7 +14,7 @@ export interface IWordList {
 }
 
 export interface IBoardGenerator {
-	generateBoard(gridWidth: number, gridHeight: number, pokemonList: IWordList): ITile[][];
+	generateBoard(gridWidth: number, gridHeight: number, pokemonList: IWordList[]): ITile[][];
 }
 
 export interface ITile {

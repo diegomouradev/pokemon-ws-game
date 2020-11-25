@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { FillGridService } from './fill-grid.service';
 import { PokemonService } from './pokemon.service';
@@ -16,8 +16,11 @@ export class WsGameComponent implements OnInit, OnDestroy {
   pokemonData: IPokemonData;
   pokemonsDataSubscription: Subscription;
 
-  pokemonList: IWordList;
+  @Output()
+  pokemonList: IWordList[];
   gameBoard: ITile[][];
+  displayList: IWordList[];
+
 
   constructor(
     private PokemonService: PokemonService,
@@ -36,8 +39,9 @@ export class WsGameComponent implements OnInit, OnDestroy {
       this.pokemonsDataSubscription = this.PokemonService.getPokemonsFirstGen().subscribe(
         (results) => {
           this.pokemonData = results;
-          this.buildPokemonList(this.pokemonData);
-          return this.gameBoard = this.generateBoard(this.GRID_WIDTH, this.GRID_HEIGHT, this.pokemonList);
+          this.pokemonList = this.buildPokemonList(this.pokemonData);
+          this.gameBoard = this.generateBoard(this.GRID_WIDTH, this.GRID_HEIGHT, this.pokemonList);
+          this.displayList = this.FillGridService.getDisplayList();
         }),
         (error) => {
           console.log(this.pokemonData);
@@ -52,6 +56,7 @@ export class WsGameComponent implements OnInit, OnDestroy {
 
   buildPokemonList(pokemonData) {
     return this.pokemonList = pokemonData.results.map( (pokemon, index) => {
+      pokemon.name = pokemon.name.replace(/[^\w]*/gi,"");
       return pokemon = {
         word: pokemon.name,
         id: `${index + 1}`,
@@ -60,7 +65,13 @@ export class WsGameComponent implements OnInit, OnDestroy {
     });
   }
 
-  generateBoard(gridWidth: number, gridHeight: number, pokemonList: IWordList): ITile[][] {
+  // FINISH THE IMPLEMENTATION OF THE BUTTON
+  generateNewGameBoard(displayList) {
+    this.FillGridService.setDisplayList(displayList);
+ 
+  }
+
+  generateBoard(gridWidth: number, gridHeight: number, pokemonList: IWordList[]): ITile[][] {
     return this.FillGridService.generateBoard(gridWidth, gridHeight, pokemonList);
   }
 
@@ -69,6 +80,6 @@ export class WsGameComponent implements OnInit, OnDestroy {
   }
 
   getPokemonList() {
-    return this.pokemonList;
+    return this.displayList;
   }
 }
