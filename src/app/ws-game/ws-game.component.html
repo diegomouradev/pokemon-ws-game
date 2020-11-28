@@ -1,5 +1,6 @@
 <main class="ws__container">
-  <grid-list (generateNewGameBoard)="generateNewGameBoard($event)" [displayList]="getPokemonList()" class="ws__list"></grid-list>
-  <app-grid [gameBoard]="getGameBoard()" [displayList]="getPokemonList()" class="ws__grid" ></app-grid>
+  <list-left  [displayList]="getDisplayList()" class="ws__list--left" #listLeft></list-left>
+  <app-grid id="ws__grid" [gameBoard]="getGameBoard()" [displayList]="getDisplayList()" class="ws__grid" ></app-grid>
+  <list-right  [displayList]="getDisplayList()" class="ws__list--right" #listRight></list-right>
 </main>
 

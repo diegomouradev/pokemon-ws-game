@@ -1,0 +1,7 @@
+<ul class="word-list">
+  <li class="list-item" (onWordFound)="markWordFound($event)" [class.list-item__completed]="pokemon.isCompleted"  *ngFor="let pokemon of displayList, even as isEven, odd as isOdd">
+    <div class="list-icon" [removeSVGAttributes]="['width', 'height']" [inlineSVG]="''+ pokemon.id +'.svg'" *ngIf="isOdd">
+    </div>
+    <span *ngIf="isOdd">{{pokemon.word}}</span>
+  </li>
+</ul>

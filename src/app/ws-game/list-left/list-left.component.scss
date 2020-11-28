@@ -19,7 +19,7 @@
   font-size: 1rem;
   color: black;
   text-transform: uppercase;
-  margin: 2rem;
+  margin: 1rem;
   filter: grayscale(100%);
 
   &__completed {
@@ -29,13 +29,13 @@
 }
 
 .list-icon {
-  max-width: 5rem;
+  width: 5rem;
   height: 5rem;
   margin-right: 1rem;
 }
 
 svg {
-  max-width: 5rem;
+  width: 5rem;
   height: 5rem;
 }
 

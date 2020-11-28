@@ -1,21 +1,27 @@
 .ws {
 
   &__container {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
     justify-content: center;
-    align-items: flex-start;
-    width: 90vw;
+    align-items: top;
   }
 
   &__grid {
+    grid-column: 2/3;
+    height: min-content;
     border: 0.2rem solid #000000;
-    padding: 0rem;
-    margin: 3rem;
+    border-radius: 1rem;
+    margin: 1rem;
   }
 
   &__list {
-    padding: 3rem;
+    &--left {
+      grid-column: 1/2;
+    }
+
+    &--right {
+      grid-column: 3/4;
+    }
     
   }
 }

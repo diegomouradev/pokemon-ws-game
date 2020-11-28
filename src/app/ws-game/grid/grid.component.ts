@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { IWordList, ITile} from '../ws-game.models';
+
 
 @Component({
   selector: 'app-grid',
@@ -8,13 +9,19 @@ import { IWordList, ITile} from '../ws-game.models';
 })
 export class GridComponent implements OnInit {
   word: string[] = [];
+  
+  @ViewChild('canvas')
+  myCanvas: ElementRef<HTMLCanvasElement>;
+  public context: CanvasRenderingContext2D;
+  @ViewChild('grid')
+  myGrid: ElementRef<HTMLDivElement>;
+
+  gridDimensions: number[];
 
   @Input()
   gameBoard: ITile[][];
-  
   @Input()
   displayList: IWordList[];
-  
   @Input()
   tile: ITile;
 
@@ -25,8 +32,8 @@ export class GridComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    
-  }  
+ 
+  }
 
   checkForWord($event): void {
     if($event.isWord) {
@@ -53,4 +60,7 @@ export class GridComponent implements OnInit {
     }
     this.onWordFound.emit(this.displayList);
   }
+
+
+
 }

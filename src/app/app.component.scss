@@ -13,3 +13,22 @@ h2 {
     text-align: center;
   }
 }
+
+.instructions {
+  display: grid;
+  width: 50%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.disclaimer {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  margin-top: 1rem;
+ 
+
+  &__title {
+    padding: 1rem;
+  }
+}

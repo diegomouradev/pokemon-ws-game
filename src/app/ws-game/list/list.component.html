@@ -1,8 +1,0 @@
-<button (click)="onButtonClicked()">New Game</button>
-
-<ul class="word-list">
-  <li class="list-item" (onWordFound)="markWordFound($event)" [class.list-item__completed]="pokemon.isCompleted"  *ngFor="let pokemon of displayList">
-    <div class="list-icon" [removeSVGAttributes]="['width', 'height']" [inlineSVG]="''+ pokemon.id +'.svg'"></div>
-    <span>{{pokemon.word}}</span>
-  </li>
-</ul>

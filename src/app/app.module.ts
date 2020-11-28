@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { WsGameComponent } from './ws-game/ws-game.component';
 import { GridComponent } from './ws-game/grid/grid.component';
 import { TileComponent } from './ws-game/tile/tile.component';
-import { ListComponent } from './ws-game/list/list.component';
+import { ListComponent } from './ws-game/list-left/list-left.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 
-import { WsGameComponent } from './ws-game/ws-game.component';
+import { ListRightComponent } from './ws-game/list-right/list-right.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { WsGameComponent } from './ws-game/ws-game.component';
     GridComponent,
     TileComponent,
     ListComponent,
-    WsGameComponent
+    WsGameComponent,
+    ListRightComponent
   ],
   imports: [
     BrowserModule,
