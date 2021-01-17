@@ -9,14 +9,6 @@ import { IWordList, ITile} from '../ws-game.models';
 })
 export class GridComponent implements OnInit {
   word: string[] = [];
-  
-  @ViewChild('canvas')
-  myCanvas: ElementRef<HTMLCanvasElement>;
-  public context: CanvasRenderingContext2D;
-  @ViewChild('grid')
-  myGrid: ElementRef<HTMLDivElement>;
-
-  gridDimensions: number[];
 
   @Input()
   gameBoard: ITile[][];
@@ -27,6 +19,8 @@ export class GridComponent implements OnInit {
 
   @Output()
   onWordFound = new EventEmitter<IWordList[]>();
+  @Output()
+  circleOnCanvas = new EventEmitter<ITile>();
 
   constructor() {
   }
@@ -37,6 +31,7 @@ export class GridComponent implements OnInit {
 
   checkForWord($event): void {
     if($event.isWord) {
+      this.circleOnCanvas.emit($event);
       if($event.letterPosition.length && this.word.length === $event.letterPosition[0]){
         this.word[$event.letterPosition[0]] = $event.letter;
       } else if ($event.letterPosition.length && this.word.length === $event.letterPosition[1]){
@@ -50,6 +45,8 @@ export class GridComponent implements OnInit {
         if( wordToCheck === iWord.word ) {
           iWord.isCompleted = true;
 
+          this.onWordFound.emit(this.displayList);
+        
           console.log(`You caught a wild ${iWord.word}`);
           
           this.word = []
@@ -58,7 +55,7 @@ export class GridComponent implements OnInit {
         }
       }
     }
-    this.onWordFound.emit(this.displayList);
+    
   }
 
 

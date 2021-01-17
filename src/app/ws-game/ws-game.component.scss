@@ -6,12 +6,23 @@
     align-items: top;
   }
 
-  &__grid {
+  &__grid-canva {
     grid-column: 2/3;
+    display: grid;
+  }
+
+  &__grid {
+    grid-column: 1/2;
+    grid-row: 1/2;
     height: min-content;
     border: 0.2rem solid #000000;
     border-radius: 1rem;
     margin: 1rem;
+  }
+
+  &__canvas {
+    grid-column: 1/2;
+    grid-row: 1/2;
   }
 
   &__list {

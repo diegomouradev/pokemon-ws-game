@@ -16,14 +16,6 @@ export class WsGameComponent implements OnInit {
   pokemonsFirstGen$: Observable<IPokemonData>;
   pokemonData: IPokemonData;
 
-  @ViewChild('canvas')
-  myCanvas: ElementRef<HTMLCanvasElement>;
-  public context: CanvasRenderingContext2D;
-  @ViewChild('grid')
-  myGrid: ElementRef<HTMLDivElement>;
-
-  gridDimensions: number[];
-
   @Output()
   pokemonList: IWordList[];
   gameBoard: ITile[][];
@@ -54,5 +46,9 @@ export class WsGameComponent implements OnInit {
 
   getDisplayList() {
     return this.displayList;
+  }
+
+  circleOnCanvas($event) {
+    console.log($event);
   }
 }
