@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { IWordList, ITile} from '../ws-game.models';
+import { IWordList, ITile, ICoordinates} from '../ws-game.models';
 
 
 @Component({
@@ -17,10 +17,11 @@ export class GridComponent implements OnInit {
   @Input()
   tile: ITile;
 
+
+
   @Output()
   onWordFound = new EventEmitter<IWordList[]>();
-  @Output()
-  circleOnCanvas = new EventEmitter<ITile>();
+
 
   constructor() {
   }
@@ -31,7 +32,7 @@ export class GridComponent implements OnInit {
 
   checkForWord($event): void {
     if($event.isWord) {
-      this.circleOnCanvas.emit($event);
+      
       if($event.letterPosition.length && this.word.length === $event.letterPosition[0]){
         this.word[$event.letterPosition[0]] = $event.letter;
       } else if ($event.letterPosition.length && this.word.length === $event.letterPosition[1]){
@@ -41,12 +42,14 @@ export class GridComponent implements OnInit {
       }
       const wordToCheck: string = this.word.join('');
       
+      
       for(let iWord of this.displayList) {
         if( wordToCheck === iWord.word ) {
           iWord.isCompleted = true;
 
           this.onWordFound.emit(this.displayList);
-        
+          
+
           console.log(`You caught a wild ${iWord.word}`);
           
           this.word = []

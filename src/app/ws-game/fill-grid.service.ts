@@ -73,10 +73,13 @@ export class FillGridService implements IBoardGenerator {
   }
   
   getWord(): IWordList {
-    let sortedWords = this.words.sort( (a,b) => (b.word.length) - (a.word.length));
-    let getOneWord = sortedWords[0];
-    sortedWords = sortedWords.splice(0,1)
-    return getOneWord;
+    // let sortedWords = this.words.sort( (a,b) => (b.word.length) - (a.word.length));
+    // let getOneWord = sortedWords[0];
+    // sortedWords = sortedWords.splice(0,1)
+    // return getOneWord;
+    const randomWord = Math.floor(Math.random() * this.words.length);
+    const word = this.words[randomWord]
+    return word;
   }
 
   generateDisplayList(iWord) {

@@ -1,9 +1,6 @@
-<main class="ws__container">
+<div class="ws__container">
   <list-left  [displayList]="getDisplayList()" class="ws__list--left" #listLeft></list-left>
-  <div class="ws__grid-canva">
-    <app-grid id="ws__grid" [gameBoard]="getGameBoard()" [displayList]="getDisplayList()" class="ws__grid" ></app-grid>
-    <app-canvas class="ws__canvas" (circleOnCanvas)="circleOnCanvas($event)" [gameBoard]="getGameBoard()"></app-canvas>
-  </div>
-  <list-right  [displayList]="getDisplayList()" class="ws__list--right" #listRight></list-right>
-</main>
+  <app-grid id="ws__grid" [gameBoard]="getGameBoard()" [displayList]="getDisplayList()" class="ws__grid" ></app-grid>
+  <list-right [displayList]="getDisplayList()" class="ws__list--right" #listRight></list-right>
+</div>
 

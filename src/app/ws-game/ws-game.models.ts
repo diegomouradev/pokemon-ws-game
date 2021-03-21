@@ -33,3 +33,8 @@ export interface ILocation {
   direction: string;
   overlap: number;
 }
+
+export interface ICoordinates {
+  positionX: number;
+  positionY: number;
+}

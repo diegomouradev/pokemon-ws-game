@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 
 import { ListRightComponent } from './ws-game/list-right/list-right.component';
-import { CanvasComponent } from './ws-game/canvas/canvas.component';
 
 
 @NgModule({
@@ -22,8 +21,7 @@ import { CanvasComponent } from './ws-game/canvas/canvas.component';
     TileComponent,
     ListComponent,
     WsGameComponent,
-    ListRightComponent,
-    CanvasComponent
+    ListRightComponent
   ],
   imports: [
     BrowserModule,
