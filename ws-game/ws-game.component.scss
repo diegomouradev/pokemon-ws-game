@@ -1,6 +1,7 @@
 .ws {
   &__container {
     display: grid;
+    width: 100vw;
     justify-content: center;
     align-items: center;
   }
@@ -8,10 +9,8 @@
   &__grid {
     grid-column: 2/3;
     grid-row: 1/2;
-    height: min-content;
-    border: 0.2rem solid #000000;
-    border-radius: 1rem;
-    margin: 1rem;
+
+    border: 0.1rem solid #000000;
   }
 
   &__list {

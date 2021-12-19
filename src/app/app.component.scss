@@ -10,12 +10,15 @@ h2 {
     font-family: $default;
     font-size: 5rem;
     text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
   }
 }
 
 .instructions {
   display: grid;
-  width: 50%;
+  width: 100%;
+  padding: 0 50px;
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -31,9 +34,6 @@ h2 {
   }
 }
 
-.section-padding {
-  padding: 50px 0px 0px 0px;
-}
 header {
   width: max-content;
   display: flex;

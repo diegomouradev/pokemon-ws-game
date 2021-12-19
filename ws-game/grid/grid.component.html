@@ -1,0 +1,10 @@
+<div #gridcontainer>
+  <canvas #canvas [height]="canvaHeight" [width]="canvaWidth"></canvas>
+  <div #grid class="grid__row" *ngFor="let row of gameBoard">
+    <grid-tile
+      *ngFor="let tile of row"
+      (onTileSelected)="buildWord($event)"
+      [tile]="tile"
+    ></grid-tile>
+  </div>
+</div>

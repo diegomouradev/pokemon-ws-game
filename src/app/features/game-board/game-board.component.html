@@ -1,0 +1,12 @@
+
+<ng-container *ngIf="gameBoard$ | async as gameBoard" >
+  <!-- <div *ngIf="wordList$ | async as wordList">
+    <div *ngFor="let word of wordList">{{word}}</div>
+  </div> -->
+  <div #gameBoardEl class="game-board" >
+    <app-board-canvas [gameBoardEl]="gameBoardEl"></app-board-canvas>
+    <div  class="game-board__row" *ngFor="let rows of gameBoard">
+        <app-board-tile  *ngFor="let tile of rows" [tile]="tile"></app-board-tile>
+    </div>
+  </div>
+</ng-container>

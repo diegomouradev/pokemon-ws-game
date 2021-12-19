@@ -14,17 +14,22 @@ export interface IWordList {
 }
 
 export interface IBoardGenerator {
-	generateBoard(gridWidth: number, gridHeight: number, pokemonList: IWordList[]): ITile[][];
+  generateBoard(
+    gridWidth: number,
+    gridHeight: number,
+    pokemonList: IWordList[]
+  ): ITile[][];
 }
 
 export interface ITile {
-	letter: string;
+  letter: string;
+  letterIndex: number;
   indexRow?: number;
   indexColumn?: number;
-  isSelected?: boolean;
+
   isWord?: boolean;
-  letterPosition?: number | number[];
-  highlightStart?: boolean;
+
+  direction?: string;
 }
 
 export interface ILocation {

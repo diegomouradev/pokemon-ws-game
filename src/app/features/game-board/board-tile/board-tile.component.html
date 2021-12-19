@@ -1,0 +1,3 @@
+<div  class="game-board__tile" (click)="onTileClick()" isSelected="isSelected" [style.backgroundColor]="isSelected ? 'grey' : 'transparent' ">
+  {{ tile.letter | uppercase }}
+</div>
