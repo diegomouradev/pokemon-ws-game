@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { GenerateNewGameBoardService } from './services/game-board.service';
@@ -10,12 +11,17 @@ import { GenerateNewGameBoardService } from './services/game-board.service';
 })
 export class GameBoardComponent {
   errorMessage: string;
-  gameBoard$ = this.gameDataService.pokeData$.pipe(
+
+
+  pokeData$ = this.gameDataService.pokeData$
+  wordList$ = this.gameDataService.wordList$
+  gameBoard$ = forkJoin([this.pokeData$, this.wordList$]).pipe(
     map(
-      pokeData => this.generateNewGameBoardService.generateGameBoard(pokeData)
+      ([pokeData, wordList]) => this.generateNewGameBoardService.buildGameBoard(pokeData, wordList)
     ),
-    catchError(err => this.errorMessage = err)
-  );
+    catchError( err => this.errorMessage = err)
+  )
+
 
   constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
     private gameDataService: GameDataService) {}

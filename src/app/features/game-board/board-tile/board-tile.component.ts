@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import {  fromEvent, Subject } from 'rxjs';
-import { Itile } from 'src/app/shared/interfaces/itile';
+import { ITile } from 'src/app/shared/interfaces/ITile';
 import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
   styleUrls: ['./board-tile.component.scss'],
 })
 export class BoardTileComponent implements OnInit {
-  @Input() tile: Itile;
+  @Input() tile: ITile;
   
   constructor(private canvasService: DrawOnCanvasService) {}
   isSelected: boolean = false;
@@ -17,7 +17,7 @@ export class BoardTileComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private tileSelectedSubject = new Subject<Itile>();
+  private tileSelectedSubject = new Subject<ITile>();
   tileSelectedAction$ = this.tileSelectedSubject.asObservable();
 
   onTileClick(): void {

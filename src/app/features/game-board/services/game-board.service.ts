@@ -25,31 +25,34 @@ export class GenerateNewGameBoardService {
   constructor(private gameDataService: GameDataService) {}
 
   gameBoard: ITile[][] = [];
-  pokemons;
+  pokemonList: string[];
+  pokemonsInTheBoard: string[] = [];
 
+  buildGameBoard(pokeData: ITile[],wordList: string[]): ITile[][] {
+    this.pokemonList = wordList;
+    this.pokemonList.sort((a, b) => b.length - a.length);
+    this.generateGameBoard();
+    this.placeWord(pokeData);
+    this.fillEmptySpots()
+    return this.gameBoard
+  }
 
-  
-  generateGameBoard(pokeData): ITile[][] {
+  generateGameBoard(): void {
     for (let i = 0; i < this.GAME_BOARD_SIZE; i++) {
       this.gameBoard.push([]);
       for (let j = 0; j < this.GAME_BOARD_SIZE; j++) {
         this.gameBoard[i].push({letter: '_'});
       }
     }
-
-    this.placeWord(pokeData);
-    this.fillEmptySpots();
-    return this.gameBoard;
   }
 
   placeWord(pokeData): void {
-    this.gameDataService.wordList$.subscribe( pokemons => this.pokemons = pokemons);
-    let length = this.pokemons.length;
-    while (length ) {
+    let length = this.pokemonList.length;
+    while (length) {
       let word = this.getWord();
       let locations = this.generatePossibleLocations(word);
-
       if (locations.length > 0) {
+        this.pokemonsInTheBoard.push(word)
         let location = locations[Math.floor(Math.random() * locations.length)];
         this.placeWordInGrid(word, location, pokeData);
       }
@@ -59,9 +62,9 @@ export class GenerateNewGameBoardService {
   }
 
   getWord(): string {
-    this.pokemons.sort((a, b) => b.length - a.length);
-    const word = this.pokemons.splice(0, 1);
-    return word.pop();
+    const pokemon = this.pokemonList.splice(0, 1);
+ 
+    return pokemon.pop();
   }
 
   // Given a word.

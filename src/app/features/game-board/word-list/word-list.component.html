@@ -1,0 +1,8 @@
+
+<ng-container *ngIf="pokemons$ | async as pokemons">
+    <section class="word-list">
+        <div *ngFor="let pokemon of pokemons">
+            <img width="50px"  [src]="pokemon.svg" [alt]="pokemon.name">
+        </div>
+    </section>
+</ng-container>

@@ -1,8 +1,8 @@
 
 <ng-container *ngIf="gameBoard$ | async as gameBoard" >
-  <!-- <div *ngIf="wordList$ | async as wordList">
-    <div *ngFor="let word of wordList">{{word}}</div>
-  </div> -->
+  <ng-container>
+    <app-word-list></app-word-list>
+  </ng-container>
   <div #gameBoardEl class="game-board" >
     <app-board-canvas [gameBoardEl]="gameBoardEl"></app-board-canvas>
     <div  class="game-board__row" *ngFor="let rows of gameBoard">
@@ -10,3 +10,5 @@
     </div>
   </div>
 </ng-container>
+
+
