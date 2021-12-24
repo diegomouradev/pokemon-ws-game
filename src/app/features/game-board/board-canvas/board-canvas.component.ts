@@ -1,7 +1,9 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { combineLatest, concat, fromEvent, merge, Observable } from 'rxjs';
+import { catchError, concatAll, concatMap, map, scan, skipUntil, takeUntil, tap } from 'rxjs/operators';
+import { WordService } from 'src/app/shared/services/word.service';
 import { DrawOnCanvasService } from '../../../shared/services/canvas.service';
-
+import { BoardTileComponent } from '../board-tile/board-tile.component';
 @Component({
   selector: 'app-board-canvas',
   templateUrl: './board-canvas.component.html',
@@ -9,7 +11,18 @@ import { DrawOnCanvasService } from '../../../shared/services/canvas.service';
 })
 export class BoardCanvasComponent implements AfterViewInit {
   canvas: HTMLCanvasElement;
-  constructor(private drawOnCanvasService: DrawOnCanvasService) { }
+  errMessage;
+
+  mouseDown$: Observable<Event>;
+  mouseMove$: Observable<Event>;;
+  mouseUp$: Observable<Event>;
+  drag$: Observable<Event>;
+  
+  constructor(
+    private canvasService: DrawOnCanvasService,
+    private wordService: WordService) { 
+   
+  }
 
   ngOnInit(): void {
   }
@@ -26,24 +39,30 @@ export class BoardCanvasComponent implements AfterViewInit {
   xFinal: number;
   yFinal: number;
 
+  // wordSubscription;
+  coordinatesSoFar: object[];
 
   ngAfterViewInit(): void {
     this.canvas = this.canvasRef.nativeElement;
     this.canvasHeight = this.gameBoardEl.getBoundingClientRect().height ;
     this.canvasWidth = this.gameBoardEl.getBoundingClientRect().width;
-    this.updateCanvaSize();
+    this.updateCanvasSize();
     this.ctx = this.canvas.getContext('2d');
-  
   }
 
-  updateCanvaSize(): void {
+  wordSubscription = this.wordService.getWord().subscribe(
+    response => {
+      this.canvasService.draw(this.ctx, this.canvasHeight, this.canvasWidth, response.coordinates);
+    },
+    error => {
+      console.log(`An error occurred: ${error.message}`)
+    }
+  );
+
+  updateCanvasSize(): void {
     this.canvas.setAttribute('width', `${this.canvasWidth}`)
     this.canvas.setAttribute('height', `${this.canvasHeight}`)
   }
 
-  onWordFound() {
-    this.drawOnCanvasService.draw(this.ctx);
-  }
 
-  
 }

@@ -26,7 +26,7 @@ export class GenerateNewGameBoardService {
 
   gameBoard: ITile[][] = [];
   pokemonList: string[];
-  pokemonsInTheBoard: string[] = [];
+  readonly pokemonsInTheBoard: string[] = [];
 
   buildGameBoard(pokeData: ITile[],wordList: string[]): ITile[][] {
     this.pokemonList = wordList;
@@ -161,11 +161,9 @@ export class GenerateNewGameBoardService {
     let SVGdata = pokeData.filter( (data) => data.name === word);
     let tile: ITile = {
       letter: word[i],
-      y: next.y,
-      x: next.x,
+      coordinates: [{  x: next.x, y: next.y}],
       direction: randomLocation.direction,
       isWord: true,
-      word: word,
       svg: SVGdata[0].svg,
     };
     return tile;

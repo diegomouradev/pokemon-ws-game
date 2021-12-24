@@ -1,4 +1,11 @@
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+
 .game-board {
+  width: min-content;
+  height: min-content;
   display: flex;
   flex-direction: column;
   justify-content: center;

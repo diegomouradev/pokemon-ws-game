@@ -2,8 +2,7 @@ export interface ITile {
   word?: string;
   url?: string;
   svg?: string;
-  y?: number;
-  x?: number;
+  coordinates?: object[];
   letter?: string;
   direction?: string;
   isWord?: boolean;

@@ -1,5 +1,5 @@
-import { Component} from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import { forkJoin, fromEvent, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { GenerateNewGameBoardService } from './services/game-board.service';
@@ -9,9 +9,12 @@ import { GenerateNewGameBoardService } from './services/game-board.service';
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss'],
 })
-export class GameBoardComponent {
+export class GameBoardComponent  {
   errorMessage: string;
 
+
+  constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
+    private gameDataService: GameDataService) {}
 
   pokeData$ = this.gameDataService.pokeData$
   wordList$ = this.gameDataService.wordList$
@@ -23,7 +26,6 @@ export class GameBoardComponent {
   )
 
 
-  constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
-    private gameDataService: GameDataService) {}
- 
+
+  
 }

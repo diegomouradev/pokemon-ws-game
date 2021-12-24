@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
+import { concat, fromEvent, merge, Observable, Subject } from 'rxjs';
+import { first, map, take, takeUntil } from 'rxjs/operators';
+import { ITile } from '../interfaces/ITile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrawOnCanvasService {
 
+
+
   constructor() { }
 
-  ctx: CanvasRenderingContext2D;
+  draw(ctx, canvasHeight, canvasWidth, coordinatesSoFar): void {
+    if(ctx) {
+      ctx.strokeStyle = 'green',
+      ctx.lineWidth = 2;
 
-  moveX:number;
-  moveY:number;
-
-firstTile$;
-  // tileSelectedAction$ = this.boardTileComponent.tileSelectedAction$.subscribe()
-  startDrawingStream(tile$) {
-    this.firstTile$ = tile$
-    this.firstTile$.subscribe( tile => console.log(tile))
+      const multiplierX = canvasWidth / 20;
+      const multiplierY = canvasHeight / 20;
+      for(let [index, coor] of coordinatesSoFar.entries()){
+        if(index > 0) {
+          ctx.strokeRect( coor[0].x * multiplierX, coor[0].y * multiplierY, 20, 20);
+        }
+        
+      }
+   
+    }
+  
   }
-
-
-  draw(ctx): void {
-    ctx.beginPath();
-ctx.moveTo(50, 140);
-ctx.lineTo(150, 60);
-ctx.lineTo(250, 140);
-ctx.closePath();
-ctx.stroke();
-  }
-
 }
