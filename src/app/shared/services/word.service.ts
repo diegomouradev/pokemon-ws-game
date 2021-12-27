@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, EMPTY, Observable, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ITile } from '../interfaces/ITile';
+import { IWordSoFar } from '../interfaces/IPokeData';
+import { IPokeTile, IPokeTileCoor } from '../interfaces/IPokeTile';
 import { DrawOnCanvasService } from './canvas.service';
 import { GameDataService } from './game-data.service';
 
@@ -13,14 +14,14 @@ export class WordService {
   errorMessage;
   
   
-  private initialValue: ITile = {word: '', coordinates: [{ x: 0, y: 0 }] }
-  private wordSubject = new BehaviorSubject<ITile>(this.initialValue);
+  private initialValue: IWordSoFar = {word: '', coordinates:  [{x: 0, y: 0}]  }
+  private wordSubject = new BehaviorSubject<IWordSoFar>(this.initialValue);
   
-  getWord(): Observable<ITile> {
+  getWord(): Observable<IWordSoFar> {
     return this.wordSubject.asObservable();
   }
 
-  buildWord(wordSoFar: string, coordinatesSoFar: object[], tile: ITile): void {
+  buildWord(wordSoFar: string, coordinatesSoFar: IPokeTileCoor[], tile: IPokeTile): void {
     this.wordSubject.next({word: `${wordSoFar}${tile.letter}`, coordinates: [...coordinatesSoFar, tile.coordinates]});
   }
 

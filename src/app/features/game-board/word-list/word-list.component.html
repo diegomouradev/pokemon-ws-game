@@ -1,8 +1,8 @@
-
-<ng-container *ngIf="pokemons$ | async as pokemons">
+<ng-container >
     <section class="word-list">
-        <div *ngFor="let pokemon of pokemons; index as index;">
-            <img width="50px"  [src]="pokemon.svg" [alt]="pokemon.name">
+        <div *ngFor="let pokemon of pokeList$ | async; index as index;">
+            <img *ngIf="listConfig === 'even' && index % 2 === 0" width="50px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
+            <img *ngIf="index % 2 === 1 && listConfig === 'odd'" width="50px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
         </div>
     </section>
-</ng-container>
+</ng-container> 

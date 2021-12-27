@@ -1,4 +1,13 @@
 .word-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+.found {
+    filter: grayscale(0);
+}
+
+.not-found {
+    filter: grayscale(1);
 }

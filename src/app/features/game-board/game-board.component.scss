@@ -1,6 +1,7 @@
 .main-grid {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: .5fr 1fr .5fr;
+  align-items: center;
 }
 
 .game-board {
@@ -14,7 +15,7 @@
   z-index: 10;
   background-color: transparent;
   border: 0.5px solid gray;
-  
+  justify-self: center;
   &__row {
     display: flex;
     justify-content: space-evenly;

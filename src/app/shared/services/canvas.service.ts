@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { concat, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { first, map, take, takeUntil } from 'rxjs/operators';
-import { ITile } from '../interfaces/ITile';
+import { IPokeTile } from '../interfaces/IPokeTile';
 
 @Injectable({
   providedIn: 'root'

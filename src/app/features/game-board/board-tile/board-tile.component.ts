@@ -2,7 +2,7 @@ import {  AfterViewChecked, AfterViewInit, Component,ElementRef,Input, OnDestroy
 import { concat, fromEvent, merge, Observable, Subject } from 'rxjs';
 import { first, map, take, takeUntil, concatAll, mergeAll, concatMap, repeat, skipUntil, tap } from 'rxjs/operators';
 
-import { ITile } from 'src/app/shared/interfaces/ITile';
+import { IPokeTile, IPokeTileCoor } from 'src/app/shared/interfaces/IPokeTile';
 import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { WordService } from 'src/app/shared/services/word.service';
@@ -14,10 +14,10 @@ import { WordService } from 'src/app/shared/services/word.service';
 })
 export class BoardTileComponent implements AfterViewInit, OnDestroy {
 
-  @Input() tile: ITile;
+  @Input() tile: IPokeTile;
   wordSoFar: string;
   wordList: string[];
-  coordinatesSoFar: object[];
+  coordinatesSoFar: IPokeTileCoor[];
 
   wordSubscription;
   wordListSubscription;
@@ -29,24 +29,24 @@ export class BoardTileComponent implements AfterViewInit, OnDestroy {
     ) {}
 
   ngAfterViewInit():void {
-    this.wordSubscription = this.wordService.getWord().subscribe(
-      response => {
-        this.wordSoFar = response.word;
-        this.coordinatesSoFar = response.coordinates;
-      },
-      error => {
-        console.log(`An error occurred: ${error.message}`)
-      }
-    );
+    // this.wordSubscription = this.wordService.getWord().subscribe(
+    //   response => {
+    //     this.wordSoFar = response.word;
+    //     this.coordinatesSoFar = response.coordinates;
+    //   },
+    //   error => {
+    //     console.log(`An error occurred: ${error.message}`)
+    //   }
+    // );
 
-    this.wordListSubscription = this.gameDataService.wordList$.subscribe(
-      response => {
-        this.wordList = response;
-      },
-      error => {
-        console.log(`An error occurred: ${error.message}`)
-      }
-    );
+    // this.wordListSubscription = this.gameDataService.wordList$.subscribe(
+    //   response => {
+    //     this.wordList = response;
+    //   },
+    //   error => {
+    //     console.log(`An error occurred: ${error.message}`)
+    //   }
+    // );
   }
   
   onTileClick(): void {
@@ -56,7 +56,7 @@ export class BoardTileComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy():void {
-    this.wordSubscription.unsubscribe();
-    this.wordListSubscription.unsubscribe();
+    // this.wordSubscription.unsubscribe();
+    // this.wordListSubscription.unsubscribe();
   }
 }

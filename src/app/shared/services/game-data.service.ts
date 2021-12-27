@@ -1,46 +1,43 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map, catchError, shareReplay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Idata } from '../interfaces/idata';
-import { Ipokemon } from '../interfaces/ipokemon';
+import { IResponse, IPokeData, IDataResponse } from '../interfaces/IPokeData';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameDataService {
   private ROOT_URL: string = 'https://pokeapi.co/api/v2/pokemon?limit=151';
-
+  private SVG_URL: string = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/'
   constructor(private http: HttpClient) {}
 
-  response$ = this.http.get<Idata>(`${this.ROOT_URL}`).pipe(
-    map((response) => response.results as Ipokemon[]) ,
+  response$ = this.http.get<IResponse>(`${this.ROOT_URL}`).pipe(
+    tap( response => console.log(response)),
+    map((response) => response.results as IDataResponse[]),
+    shareReplay(),
     catchError(this.handleError)
   );
 
   pokeData$ = this.response$.pipe(
     map(
-      pokeData => pokeData.filter( pokemon => !pokemon.name.includes("nidoran"))
-    ),
-    map(
-      (pokeData) =>
-        pokeData.map((pokemon, index) => ({
-          ...pokemon,
-          svg: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-            index + 1
-          }.svg`,
+      pokeData => {
+        let pokeDataFilter = pokeData.filter( pokemon => !pokemon.name.includes("nidoran"));
+        let pokeDataObject = pokeDataFilter.map((pokemon, index) => (
+          { word: pokemon.name, 
+            urlSvg: `${this.SVG_URL}${index + 1}.svg`, 
+            isFound: false
+          } as IPokeData));
         
-        }))
+       return pokeDataObject;
+      }
     ),
+    tap( pokeData => console.log(pokeData)),
     catchError(this.handleError)
   )
 
-  wordList$ = this.pokeData$.pipe(
-    map(
-      pokeData => pokeData.map( pokemon => pokemon.name)
-    ),
-    catchError(this.handleError)
-  )
+ 
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;

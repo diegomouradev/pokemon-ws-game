@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { GenerateNewGameBoardService } from '../services/game-board.service';
@@ -10,19 +10,14 @@ import { GenerateNewGameBoardService } from '../services/game-board.service';
 })
 export class WordListComponent   {
   errorMessage;
-  constructor(private gameDataService: GameDataService,
-    private generateNewGamBoardService: GenerateNewGameBoardService) { }
 
+  constructor(private generateNewGamBoardService: GenerateNewGameBoardService) { }
   
-  pokemons$ = this.gameDataService.pokeData$.pipe(
-    map(
-      pokemons => pokemons.filter( pokemon => this.generateNewGamBoardService.pokemonsInTheBoard.indexOf(pokemon.name) >= 0 )
-    ),
-    catchError(err => this.errorMessage = err)
-  )
-
-
-
-
-
+  @Input() listConfig: string;
+  
+  // setListConfig($event): void {
+  //   this.listConfig = $event;
+  // }
+  
+  pokeList$ = this.generateNewGamBoardService.pokeData$
 }

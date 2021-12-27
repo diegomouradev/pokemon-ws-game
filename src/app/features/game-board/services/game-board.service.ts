@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Subscription } from 'rxjs';
+import { EMPTY, from, Observable, of, Subscription } from 'rxjs';
 import { Ilocation } from 'src/app/shared/interfaces/ilocation';
-import { Ipokemon } from 'src/app/shared/interfaces/ipokemon';
-import { ITile } from 'src/app/shared/interfaces/ITile';
+import { IPokeData } from 'src/app/shared/interfaces/IPokeData';
+
+import { IPokeTile } from 'src/app/shared/interfaces/IPokeTile';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 
 @Injectable()
@@ -24,16 +25,19 @@ export class GenerateNewGameBoardService {
 
   constructor(private gameDataService: GameDataService) {}
 
-  gameBoard: ITile[][] = [];
-  pokemonList: string[];
-  readonly pokemonsInTheBoard: string[] = [];
+  public gameBoard: IPokeTile[][] = [];
+  private pokeList: IPokeData[] = [];
+  public pokeData$: Observable<IPokeData[]>;
+  private pokeWord: IPokeData[];
+  
 
-  buildGameBoard(pokeData: ITile[],wordList: string[]): ITile[][] {
-    this.pokemonList = wordList;
-    this.pokemonList.sort((a, b) => b.length - a.length);
+  buildGameBoard(pokeData): IPokeTile[][] {
+    this.pokeWord = pokeData;
+    this.pokeWord.sort((a, b) => b.word.length - a.word.length);
     this.generateGameBoard();
-    this.placeWord(pokeData);
+    this.placeWord();
     this.fillEmptySpots()
+    this.pokeData$ = of(this.pokeList);
     return this.gameBoard
   }
 
@@ -41,30 +45,30 @@ export class GenerateNewGameBoardService {
     for (let i = 0; i < this.GAME_BOARD_SIZE; i++) {
       this.gameBoard.push([]);
       for (let j = 0; j < this.GAME_BOARD_SIZE; j++) {
-        this.gameBoard[i].push({letter: '_'});
+        this.gameBoard[i].push({letter: '_', coordinates: {x: 0,y: 0}});
       }
     }
   }
 
-  placeWord(pokeData): void {
-    let length = this.pokemonList.length;
+  placeWord(): void {
+    let length = this.pokeWord.length;
     while (length) {
-      let word = this.getWord();
-      let locations = this.generatePossibleLocations(word);
+      let pokemon = this.getWord();
+      let locations = this.generatePossibleLocations(pokemon.word);
       if (locations.length > 0) {
-        this.pokemonsInTheBoard.push(word)
+
         let location = locations[Math.floor(Math.random() * locations.length)];
-        this.placeWordInGrid(word, location, pokeData);
+        this.placeWordInGrid(pokemon.word, location);
+        this.pokeList.push(pokemon);
       }
       length--;
       
     }
   }
 
-  getWord(): string {
-    const pokemon = this.pokemonList.splice(0, 1);
- 
-    return pokemon.pop();
+  getWord(): IPokeData {
+    const pokeWord =  this.pokeWord.splice(0, 1);
+    return pokeWord[0];
   }
 
   // Given a word.
@@ -148,23 +152,19 @@ export class GenerateNewGameBoardService {
   //   TODO: Optimize Overlap
   }
 
-  placeWordInGrid(word, randomLocation: Ilocation, pokeData: ITile[]) {
+  placeWordInGrid(word, randomLocation: Ilocation) {
     for (let i = 0, length = word.length; i < length; i++) {
       let next = this.getNextTile[randomLocation.direction];
       next = next(randomLocation.x, randomLocation.y, i);
-      let tile = this.buildTile(word, next, i, randomLocation, pokeData);
+      let tile = this.buildTile(word, next, i);
       this.gameBoard[next.y][next.x] = tile;
     }
   }
 
-  buildTile(word, next, i, randomLocation, pokeData): ITile {
-    let SVGdata = pokeData.filter( (data) => data.name === word);
-    let tile: ITile = {
+  buildTile(word, next, i): IPokeTile {
+    let tile: IPokeTile = {
       letter: word[i],
-      coordinates: [{  x: next.x, y: next.y}],
-      direction: randomLocation.direction,
-      isWord: true,
-      svg: SVGdata[0].svg,
+      coordinates: { x: next.x, y: next.y},
     };
     return tile;
   }
