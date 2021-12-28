@@ -14,10 +14,7 @@ export class WordListComponent   {
   constructor(private generateNewGamBoardService: GenerateNewGameBoardService) { }
   
   @Input() listConfig: string;
-  
-  // setListConfig($event): void {
-  //   this.listConfig = $event;
-  // }
+
   
   pokeList$ = this.generateNewGamBoardService.pokeData$
 }

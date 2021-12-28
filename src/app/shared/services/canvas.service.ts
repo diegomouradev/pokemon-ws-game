@@ -21,7 +21,7 @@ export class DrawOnCanvasService {
       const multiplierY = canvasHeight / 20;
       for(let [index, coor] of coordinatesSoFar.entries()){
         if(index > 0) {
-          ctx.strokeRect( coor[0].x * multiplierX, coor[0].y * multiplierY, 20, 20);
+          ctx.strokeRect( coor.x * multiplierX, coor.y * multiplierY, 20, 20);
         }
         
       }

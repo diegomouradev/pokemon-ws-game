@@ -19,4 +19,5 @@ export interface IPokeData {
 export interface IWordSoFar {
   word: string,
   coordinates: object[];
+  isWordFound?: boolean;
 }

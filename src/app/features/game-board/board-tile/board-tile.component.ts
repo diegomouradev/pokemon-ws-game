@@ -1,62 +1,48 @@
-import {  AfterViewChecked, AfterViewInit, Component,ElementRef,Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { concat, fromEvent, merge, Observable, Subject } from 'rxjs';
-import { first, map, take, takeUntil, concatAll, mergeAll, concatMap, repeat, skipUntil, tap } from 'rxjs/operators';
+import {  AfterViewChecked, AfterViewInit, Component,ElementRef,Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import { concat, forkJoin, fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
+import { first, map, take, takeUntil, concatAll, mergeAll, concatMap, repeat, skipUntil, tap, catchError } from 'rxjs/operators';
+import { IPokeData, IWordSoFar } from 'src/app/shared/interfaces/IPokeData';
 
 import { IPokeTile, IPokeTileCoor } from 'src/app/shared/interfaces/IPokeTile';
 import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { WordService } from 'src/app/shared/services/word.service';
+import { EventEmitter } from '@angular/core';
+import { GenerateNewGameBoardService } from '../services/game-board.service';
 
 @Component({
   selector: 'app-board-tile',
   templateUrl: './board-tile.component.html',
   styleUrls: ['./board-tile.component.scss'],
 })
-export class BoardTileComponent implements AfterViewInit, OnDestroy {
+export class BoardTileComponent implements  OnDestroy {
 
   @Input() tile: IPokeTile;
-  wordSoFar: string;
-  wordList: string[];
-  coordinatesSoFar: IPokeTileCoor[];
-
-  wordSubscription;
-  wordListSubscription;
-
+  @Output() wordIsFound = new EventEmitter();
   constructor(
     private wordService: WordService, 
-    private gameDataService: GameDataService,
+    private gameBoardService: GenerateNewGameBoardService,
     private drawOnCanvasService: DrawOnCanvasService
     ) {}
 
-  ngAfterViewInit():void {
-    // this.wordSubscription = this.wordService.getWord().subscribe(
-    //   response => {
-    //     this.wordSoFar = response.word;
-    //     this.coordinatesSoFar = response.coordinates;
-    //   },
-    //   error => {
-    //     console.log(`An error occurred: ${error.message}`)
-    //   }
-    // );
+    wordSoFar: IWordSoFar[];
+    pokeList: IPokeData[];
 
-    // this.wordListSubscription = this.gameDataService.wordList$.subscribe(
-    //   response => {
-    //     this.wordList = response;
-    //   },
-    //   error => {
-    //     console.log(`An error occurred: ${error.message}`)
-    //   }
-    // );
-  }
+    wordSoFarSub: Subscription = this.wordService.getWord().subscribe(
+      wordSoFar =>  this.wordSoFar = wordSoFar
+    );
+    pokeListSub: Subscription = this.gameBoardService.pokeData$.subscribe(
+      pokeList => this.pokeList = pokeList
+    );
   
   onTileClick(): void {
-    this.wordService.buildWord(this.wordSoFar, this.coordinatesSoFar, this.tile)
-    const isWordFound = this.wordService.checkWordList(this.wordSoFar, this.wordList);
-    
+    this.wordService.buildWord(this.wordSoFar, this.tile, this.pokeList)
+    const isWordFound = this.wordService.checkWordList(this.wordSoFar,this.pokeList);
+    this.wordService.resetWord()
   }
 
   ngOnDestroy():void {
-    // this.wordSubscription.unsubscribe();
-    // this.wordListSubscription.unsubscribe();
+    this.wordSoFarSub.unsubscribe();
+    this.pokeListSub.unsubscribe();
   }
 }

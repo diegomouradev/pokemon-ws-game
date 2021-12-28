@@ -24,7 +24,6 @@ export class GameBoardComponent  {
   gameBoard$ = this.pokeData$.pipe(
     map(
       (pokeData) => {
-
         return this.generateNewGameBoardService.buildGameBoard(pokeData);
       }
     ),

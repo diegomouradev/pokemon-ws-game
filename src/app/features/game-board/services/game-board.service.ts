@@ -6,7 +6,9 @@ import { IPokeData } from 'src/app/shared/interfaces/IPokeData';
 import { IPokeTile } from 'src/app/shared/interfaces/IPokeTile';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class GenerateNewGameBoardService {
   errorMessage;
 
@@ -26,9 +28,9 @@ export class GenerateNewGameBoardService {
   constructor(private gameDataService: GameDataService) {}
 
   public gameBoard: IPokeTile[][] = [];
-  private pokeList: IPokeData[] = [];
+  public pokeList: IPokeData[] = [];
   public pokeData$: Observable<IPokeData[]>;
-  private pokeWord: IPokeData[];
+  public pokeWord: IPokeData[];
   
 
   buildGameBoard(pokeData): IPokeTile[][] {
