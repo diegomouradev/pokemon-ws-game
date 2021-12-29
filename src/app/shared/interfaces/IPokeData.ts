@@ -13,7 +13,7 @@ export interface IPokeData {
   word: string,
   urlSvg: string,
   isFound: boolean,
-  tiles?: IPokeTile[]
+ 
 }
 
 export interface IWordSoFar {

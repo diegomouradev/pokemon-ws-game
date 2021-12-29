@@ -14,7 +14,6 @@ export class GameDataService {
   constructor(private http: HttpClient) {}
 
   response$ = this.http.get<IResponse>(`${this.ROOT_URL}`).pipe(
-    tap( response => console.log(response)),
     map((response) => response.results as IDataResponse[]),
     shareReplay(),
     catchError(this.handleError)
@@ -23,17 +22,15 @@ export class GameDataService {
   pokeData$ = this.response$.pipe(
     map(
       pokeData => {
-        let pokeDataFilter = pokeData.filter( pokemon => !pokemon.name.includes("nidoran"));
-        let pokeDataObject = pokeDataFilter.map((pokemon, index) => (
+        let pokeDataObject = pokeData.map((pokemon, index) => (
           { word: pokemon.name, 
             urlSvg: `${this.SVG_URL}${index + 1}.svg`, 
             isFound: false
           } as IPokeData));
-        
-       return pokeDataObject;
+          let pokeDataFilter = pokeDataObject.filter( pokemon => !pokemon.word.includes("nidoran"));
+       return pokeDataFilter;
       }
     ),
-    tap( pokeData => console.log(pokeData)),
     catchError(this.handleError)
   )
 

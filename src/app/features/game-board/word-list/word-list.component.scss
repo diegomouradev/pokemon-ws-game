@@ -2,6 +2,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+
+}
+
+.word-list div {
+    padding: 0 5px;
 }
 
 .found {

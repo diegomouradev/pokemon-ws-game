@@ -1,21 +1,21 @@
 .main-grid {
   display: grid;
-  grid-template-columns: .5fr 1fr .5fr;
+  grid-template-columns: 1fr ;
+  grid-template-rows: min-content 1fr;
   align-items: center;
+  row-gap: 50px;
 }
 
 .game-board {
-  width: min-content;
-  height: min-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
   position: relative;
   z-index: 10;
   background-color: transparent;
-  border: 0.5px solid gray;
+  border: 0.1px solid black;
   justify-self: center;
+  border-radius: 10px;
+  overflow: hidden;
+
   &__row {
     display: flex;
     justify-content: space-evenly;
@@ -23,7 +23,7 @@
   }
 
   &__tile {
-    padding: 5px;
+    padding: 6px;
    
   }
 }
