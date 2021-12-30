@@ -13,7 +13,7 @@ export class DrawOnCanvasService {
   draw(ctx, canvasHeight, canvasWidth, coors): void {
     ctx.beginPath();
 
-    const lineargradient = ctx.createLinearGradient(0, 0, 120, 120);
+    const lineargradient = ctx.createLinearGradient(0, 0, 60, 60);
     lineargradient.addColorStop(0, '#d4fc79');
     lineargradient.addColorStop(1, '#96e6a1');
     ctx.fillStyle = lineargradient;

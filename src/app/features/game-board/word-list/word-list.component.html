@@ -1,6 +1,6 @@
 <ng-container >
     <section class="word-list">
-        <div *ngFor="let pokemon of pokeList$ | async; index as index;">
+        <div *ngFor="let pokemon of isPokeWordFound$ | async; index as index;">
             <img  width="60px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
             
         </div>

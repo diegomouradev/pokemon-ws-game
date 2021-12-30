@@ -1,7 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
-import { filter, map, mergeScan } from 'rxjs/operators';
-import { IPokeTile } from 'src/app/shared/interfaces/IPokeTile';
+import { Component } from '@angular/core';
+import {  of } from 'rxjs';
+import { map, mergeScan, tap, withLatestFrom } from 'rxjs/operators';
+
 import { WordService } from 'src/app/shared/services/word.service';
 import { GenerateNewGameBoardService } from '../services/game-board.service';
 
@@ -10,33 +10,29 @@ import { GenerateNewGameBoardService } from '../services/game-board.service';
   templateUrl: './word-list.component.html',
   styleUrls: ['./word-list.component.scss']
 })
-export class WordListComponent implements OnDestroy  {
+export class WordListComponent  {
   errorMessage;
   seed: string = "";
 
   constructor(private generateNewGamBoardService: GenerateNewGameBoardService,
     private wordService: WordService) { }
-  pokeList$ = this.generateNewGamBoardService.pokeData$
-  pokeWordAction$ = this.wordService.getPokeWordActionObservable();
-  pokeWordSoFar$ = this.pokeWordAction$.pipe(
-    mergeScan( (acc, letter) => of(acc + letter), this.seed)
-  )
-  
-  isWordFound$ = combineLatest([this.pokeList$, this.pokeWordSoFar$]).pipe(
-    map( ([pokeList, pokeWordSoFar]) => pokeList.map( pokemon => {
-          if(pokemon.word === pokeWordSoFar) {
-            pokemon.isFound = true;
-            this.wordService.emitWordFound(pokemon)
-            return pokemon;
-          } else {
-            return pokemon
-          }
-        })
-    )
-  ).subscribe( result => console.log(result))
 
-  ngOnDestroy():void {
-    this.isWordFound$.unsubscribe();
-  
-  }
+  pokeList$ = this.generateNewGamBoardService.pokeData$
+
+  isPokeWordFound$ = this.wordService.getPokeWordActionObservable()
+  .pipe(
+    mergeScan( (acc, pokeTile) => pokeTile.letter === '' ? of(pokeTile.letter) : of(acc + pokeTile.letter), this.seed),
+    tap(acc => console.log(acc)),
+    withLatestFrom(this.pokeList$),
+    map( ([pokeWordSoFar, pokeList]) => pokeList.map( pokemon => {
+              if(pokemon.word === pokeWordSoFar && pokemon.isFound === false) {
+                pokemon.isFound = true;
+                this.wordService.resetPokeWordSubject();
+                return pokemon;
+              } else {
+                return pokemon
+              };
+            })
+        ),
+  )
 }

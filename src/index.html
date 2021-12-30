@@ -10,6 +10,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <app-root class="app"></app-root>
+  <header class="section-padding">
+    <div style="display: flex; flex-wrap: wrap; width: min-content;">
+      <h1 class="heading-primary">Poke</h1>
+      <h1 class="heading-primary">Word</h1>
+      <h1 class="heading-primary">Search</h1>
+    </div>
+
+    <article class="instructions">
+      <p>Pokemons can be found in five different orientations:</p>
+      <div class="orientations">
+        <ul>
+          <li>horizontal</li>
+          <li>horizontalBack</li>
+          <li>vertical</li>
+          <li>verticalUp</li>
+        </ul>
+        <ul>
+          <li>diagonal</li>
+          <li>diagonalBack</li>
+          <li>diagonalUp</li>
+          <li>diagonalUpBack</li>
+        </ul>
+      </div>
+      <p>
+        No matter the direction start selecting from the first to the last letter!
+      </p>
+    </article>
+  </header>
+
+    <app-root></app-root>
+    
+    <footer class="section-padding">
+      <article class="disclaimer">
+        <p>
+          <a href="https://github.com/diegomouradev/ws-game"
+            >Pokemons Word Search</a
+          >
+          is developed in Angular10 by
+          <a href="https://github.com/diegomouradev">Diego Moura</a> using the
+          <a href="https://pokeapi.co/">PokeAPI</a> and the game is still under
+          implementation. Make sure to follow the project on GitHub to get
+          notifications on updates.
+        </p>
+        <p>
+          Visit the Github repository for questions, issues, and suggestions. This
+          is a self-teaching project so no pull requests are accepted, otherwise how
+          would I learn, right?.
+        </p>
+      </article>
+    </footer>
 </body>
 </html>

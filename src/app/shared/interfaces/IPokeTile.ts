@@ -1,8 +1,8 @@
 export interface IPokeTile {
   letter: string;
-  coordinates: IPokeTileCoor;
-  word: string;
-  i: number;
+  coordinates?: IPokeTileCoor;
+  wordLength: number;
+  letterIndex: number;
 }
 
 export interface IPokeTileCoor {

@@ -47,7 +47,7 @@ export class GenerateNewGameBoardService {
     for (let i = 0; i < this.GAME_BOARD_SIZE; i++) {
       this.gameBoard.push([]);
       for (let j = 0; j < this.GAME_BOARD_SIZE; j++) {
-        this.gameBoard[i].push({letter: '_', coordinates: {x: 0,y: 0}, word: '_', i: 0});
+        this.gameBoard[i].push({letter: '_', coordinates: {x: 0,y: 0}, wordLength: 0, letterIndex: 0});
       }
     }
   }
@@ -167,8 +167,8 @@ export class GenerateNewGameBoardService {
     let tile: IPokeTile = {
       letter: word[i],
       coordinates: { x: next.x, y: next.y},
-      word: word,
-      i: i
+      wordLength: word.length,
+      letterIndex: i
     };
     return tile;
   }

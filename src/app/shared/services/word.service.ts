@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, EMPTY, Observable, of, Subject } from 'rxjs';
-import { catchError, map, mergeScan } from 'rxjs/operators';
-import { GenerateNewGameBoardService } from 'src/app/features/game-board/services/game-board.service';
-import { IPokeData, IWordSoFar } from '../interfaces/IPokeData';
-import { IPokeTile, IPokeTileCoor } from '../interfaces/IPokeTile';
-import { DrawOnCanvasService } from './canvas.service';
-import { GameDataService } from './game-data.service';
-
-
+import { BehaviorSubject, Observable } from 'rxjs';
+import { IPokeTile } from '../interfaces/IPokeTile';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,40 +9,24 @@ export class WordService {
 
   constructor() { }
 
-  private pokeWordSubject = new Subject<IPokeTile>();
+  pokeWordInitialValue = {letter: '' , wordLength: 0, letterIndex: 0}
+
+  private pokeWordSubject = new BehaviorSubject<IPokeTile>(this.pokeWordInitialValue);
   pokeWordAction$ = this.pokeWordSubject.asObservable();
   
-  private pokeWordCoorSubject = new Subject<IPokeTile>();
-  pokeWordCoorAction$ = this.pokeWordCoorSubject.asObservable();
-
-  private wordsFoundSubject = new Subject<IPokeData>();
-  wordsFoundAction$ = this.wordsFoundSubject.asObservable();
-
-
   emitIPokeTile(iPokeTile): void {
-    this.pokeWordSubject.next(iPokeTile.letter);
-    this.pokeWordCoorSubject.next(iPokeTile.coordinates);
+    this.pokeWordSubject.next(iPokeTile);
   }
 
   getPokeWordActionObservable(): Observable<IPokeTile> {
     return this.pokeWordAction$;
   }
 
-  getPokeWordCoorActionObservable(): Observable<IPokeTile> {
-    return this.pokeWordCoorAction$;
+  resetPokeWordSubject() {
+    this.pokeWordSubject.next(this.pokeWordInitialValue);
   }
 
-  emitWordFound(IPokeData): void {
-    this.wordsFoundSubject.next(IPokeData);
-  }
 
-  getWordsFondObservable(): Observable<IPokeData> {
-    return this.wordsFoundAction$;
-  }
-
-  resetPokeWordSubject(pokeList) {
-    this.pokeWordSubject.next()
-  }
 
   
 }

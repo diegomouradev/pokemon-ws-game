@@ -12,21 +12,78 @@ $default: "Press Start 2P", cursive;
 html {
   font-family: $default;
   font-size: 62.5%; // 1rem = 10px
+
 }
 
 body {
-  padding: 50px;
+
   background-image: linear-gradient(309deg,#0093e9,#80d0c7);
+
 }
 
-.app {
+header {
   display: flex;
-  justify-content: center;
-  align-content: center;
   flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.orientations {
+  width: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2.5rem 0;
 }
 
 li {
   list-style: none;
   margin-bottom: 1rem;
+}
+
+.section-padding {
+  padding: 2.5rem 5rem 5.5rem
+}
+
+.instructions{
+  width: min-content;
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.068);
+  border-radius: 3rem;
+  box-shadow: .1rem .1rem .1rem rgba(0,0,0,.2);
+}
+
+.heading-primary {
+  display: block;
+  font-family: "Press Start 2P", monospace;
+  font-size: 52px;
+  margin: 0px;
+  color: wheat;
+  text-shadow: 1px 1px 2px black;
+}
+
+.heading-secondary {
+  font-family: "Press Start 2P", monospace;
+  font-size: 32px;
+  margin: 0px;
+  color: wheat;
+  text-shadow: 1px 1px 2px black;
+}
+p, li {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.4rem;
+  margin: 0px;
+  color: wheat;
+  text-shadow: 1px 1px 2px black;
+  line-height: 1.6;
+}
+
+.disclaimer p {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.disclaimer a {
+  color: wheat;
+  
 }
