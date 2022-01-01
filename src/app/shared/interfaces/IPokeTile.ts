@@ -9,3 +9,7 @@ export interface IPokeTileCoor {
   x: number,
   y: number,
 }
+
+export interface IPokeTilePartial {
+  letter: string;
+}

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { of } from 'rxjs';
-import { mergeScan, skip, skipLast, tap } from 'rxjs/operators';
+import { mergeScan, skip, skipLast, takeUntil, tap } from 'rxjs/operators';
 
 import { WordService } from 'src/app/shared/services/word.service';
 import { DrawOnCanvasService } from '../../../shared/services/canvas.service';
@@ -33,13 +33,16 @@ export class BoardCanvasComponent implements AfterViewInit, OnDestroy {
     ) {}
 
     seedCoor: object[] = [];
+    pokeWordFound$ = this.wordService.getWordFoundObservable();
     pokeCoorSub = this.wordService.getPokeWordActionObservable().pipe(
       skip(1),
       mergeScan( (acc, pokeTile) => pokeTile.coordinates ? of([...acc, pokeTile.coordinates]) : of(this.seedCoor), this.seedCoor),
-      tap(coordinates => console.log(coordinates))
+      // takeUntil(this.pokeWordFound$),
     ).subscribe( coor => {
       coor[0] ? this.canvasService.draw(this.ctx, this.canvasWidth, this.canvasHeight, coor) : console.log(`No coordinates found!`)
     });
+
+
 
   ngAfterViewInit(): void {
     this.canvas = this.canvasRef.nativeElement;
@@ -57,5 +60,9 @@ export class BoardCanvasComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.pokeCoorSub.unsubscribe()
   } 
+
+  resetSelection(ctx, canvasHeight, canvasWidth, coors): void {
+    this.canvasService.resetSelection(ctx, canvasHeight, canvasWidth, coors);
+  }
 
 }

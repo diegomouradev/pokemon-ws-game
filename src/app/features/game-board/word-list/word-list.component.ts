@@ -22,11 +22,12 @@ export class WordListComponent  {
   isPokeWordFound$ = this.wordService.getPokeWordActionObservable()
   .pipe(
     mergeScan( (acc, pokeTile) => pokeTile.letter === '' ? of(pokeTile.letter) : of(acc + pokeTile.letter), this.seed),
-    tap(acc => console.log(acc)),
     withLatestFrom(this.pokeList$),
+    tap(result => console.log(result)),
     map( ([pokeWordSoFar, pokeList]) => pokeList.map( pokemon => {
               if(pokemon.word === pokeWordSoFar && pokemon.isFound === false) {
                 pokemon.isFound = true;
+                this.wordService.emitWordFound(pokemon);
                 this.wordService.resetPokeWordSubject();
                 return pokemon;
               } else {

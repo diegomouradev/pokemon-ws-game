@@ -1,3 +1,4 @@
+
 .word-list {
     display: flex;
     flex-wrap: wrap;
@@ -7,6 +8,21 @@
     background-color: rgba(255, 255, 255, 0.068);
     border-radius: 3rem;
     box-shadow: .1rem .1rem .1rem rgba(0,0,0,.2);
+
+    &__wrapper {
+        grid-column: 1/-1;
+        grid-row: 1/2;
+        display: grid;
+        grid-auto-columns: .5fr .6fr .5fr;
+        padding: 0 25px;
+    }
+
+    &__left {
+        grid-column: 1/2;
+    }
+    &__right {
+        grid-column: 3/4;
+    }
 }
 
 .word-list div {
@@ -14,9 +30,9 @@
 }
 
 .found {
-    filter: grayscale(0);
+    filter: grayscale(1);
 }
 
 .not-found {
-    filter: grayscale(1);
+    filter: grayscale(0);
 }

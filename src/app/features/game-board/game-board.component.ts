@@ -1,5 +1,6 @@
 import { Component, Output} from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
+import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { GenerateNewGameBoardService } from './services/game-board.service';
 
@@ -15,7 +16,8 @@ export class GameBoardComponent  {
   @Output() isOdd = 'odd';
   
   constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
-    private gameDataService: GameDataService) {}
+    private gameDataService: GameDataService,
+    private canvasService: DrawOnCanvasService) {}
 
   pokeData$ = this.gameDataService.pokeData$
   gameBoard$ = this.pokeData$.pipe(
@@ -28,6 +30,6 @@ export class GameBoardComponent  {
   )
 
 
-
+ 
   
 }

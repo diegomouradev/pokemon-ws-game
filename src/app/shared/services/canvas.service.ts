@@ -36,4 +36,8 @@ export class DrawOnCanvasService {
     ctx.fill();
   
   }
+
+  resetSelection(ctx, canvasHeight, canvasWidth, coors): void {
+    
+  }
 }

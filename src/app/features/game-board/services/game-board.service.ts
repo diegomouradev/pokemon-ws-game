@@ -3,7 +3,7 @@ import { EMPTY, from, Observable, of, Subscription } from 'rxjs';
 import { Ilocation } from 'src/app/shared/interfaces/ilocation';
 import { IPokeData } from 'src/app/shared/interfaces/IPokeData';
 
-import { IPokeTile } from 'src/app/shared/interfaces/IPokeTile';
+import { IPokeTile, IPokeTilePartial } from 'src/app/shared/interfaces/IPokeTile';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 
 @Injectable({
@@ -27,13 +27,13 @@ export class GenerateNewGameBoardService {
 
   constructor(private gameDataService: GameDataService) {}
 
-  public gameBoard: IPokeTile[][] = [];
+  public gameBoard: IPokeTilePartial[][] = [];
   private pokeList: IPokeData[] = [];
   public pokeData$: Observable<IPokeData[]>;
   private pokeWord: IPokeData[];
   
 
-  buildGameBoard(pokeData): IPokeTile[][] {
+  buildGameBoard(pokeData): object[][] {
     this.pokeWord = pokeData;
     this.pokeWord.sort((a, b) => b.word.length - a.word.length);
     this.generateGameBoard();
@@ -47,7 +47,7 @@ export class GenerateNewGameBoardService {
     for (let i = 0; i < this.GAME_BOARD_SIZE; i++) {
       this.gameBoard.push([]);
       for (let j = 0; j < this.GAME_BOARD_SIZE; j++) {
-        this.gameBoard[i].push({letter: '_', coordinates: {x: 0,y: 0}, wordLength: 0, letterIndex: 0});
+        this.gameBoard[i].push({letter: '_'});
       }
     }
   }

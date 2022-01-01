@@ -1,14 +1,15 @@
 .main-grid {
   display: grid;
-  grid-template-columns: 60% 40% ;
+  grid-template-columns: .5fr 1fr .5fr;
   grid-template-rows:  1fr;
   align-items: center;
   justify-content: center;
-  row-gap: 50px;
+
 }
 
 .game-board {
-
+  grid-column: 1/-1;
+  grid-row: 1/2;
   position: relative;
   z-index: 10;
   background-color: transparent;
@@ -27,4 +28,11 @@
     padding: 6px;
    
   }
+}
+
+.word-list__wrapper {
+  
+    grid-column: 1/-1;
+    grid-row: 1/2;
+
 }
