@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, from, Observable, of, Subscription } from 'rxjs';
+import { Observable, of} from 'rxjs';
+import { max } from 'rxjs/operators';
 import { Ilocation } from 'src/app/shared/interfaces/ilocation';
 import { IPokeData } from 'src/app/shared/interfaces/IPokeData';
 
 import { IPokeTile, IPokeTilePartial } from 'src/app/shared/interfaces/IPokeTile';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
+
+/**
+ * Inspired by
+* Wordfind.js 0.0.1
+* (c) 2012 Bill, BunKat LLC.
+* Wordfind is freely distributable under the MIT license.
+* For all details and documentation:
+*     https://github.com/bunkat/wordfind
+* Adapted by Diego Moura
+*/
 
 @Injectable({
   providedIn: 'root'
@@ -69,13 +80,16 @@ export class GenerateNewGameBoardService {
   }
 
   getWord(): IPokeData {
-    const pokeWord =  this.pokeWord.splice(0, 1);
+    // const pokeWord =  this.pokeWord.splice(0, 1);
+    const randomIndex = Math.floor(Math.random() * this.pokeWord.length);
+    const pokeWord =  this.pokeWord.splice(randomIndex, 1);
     return pokeWord[0];
   }
 
   // Given a word.
   generatePossibleLocations(word): Ilocation[] {
     let availableLocations: Ilocation[] = [];
+    let maxOverlap = 0;
     // For each direction, and one at a time.
     for(let direction of this.DIRECTIONS) {
       // Visit every column of every row of the gameBoard, and check
@@ -85,7 +99,7 @@ export class GenerateNewGameBoardService {
       let x,y;
       x = 0; // Column
       y = 0; // Row
-
+  
       // While there are rows to check.
       while(y < this.GAME_BOARD_SIZE) {
         // check if the direction is valid.
@@ -100,8 +114,9 @@ export class GenerateNewGameBoardService {
           // word overlapping with the current word we are trying to place.
           let overlap = this.checkForOverlap(word, x, y, direction);
 
-          if(overlap >= 0) {
-            availableLocations.push({ x, y, direction });
+          if(overlap >= maxOverlap) {
+            maxOverlap = overlap;
+            availableLocations.push({ x, y, direction, overlap });
           } 
 
           // Move to the next columns.
@@ -125,7 +140,15 @@ export class GenerateNewGameBoardService {
        
       }
     }
-     return availableLocations;
+     return this.pruneLocations(availableLocations, maxOverlap);
+  }
+
+  pruneLocations(locations, overlap): Ilocation[] {
+    const prunedLocations= []
+    for(let location of locations) {
+      location.overlap >= overlap ? prunedLocations.push(location) : location;
+    }
+    return prunedLocations;
   }
 
   checkForOverlap(word: string, x, y, direction): number {
@@ -151,7 +174,6 @@ export class GenerateNewGameBoardService {
       }
     }
    return overlap;
-  //   TODO: Optimize Overlap
   }
 
   placeWordInGrid(word, randomLocation: Ilocation) {

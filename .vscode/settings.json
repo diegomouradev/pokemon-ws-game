@@ -7,5 +7,5 @@
   ],
   "prettier.singleQuote": true,
   "prettier.useTabs": true,
-  "prettier.printWidth": 300
+  "prettier.printWidth": 200
 }

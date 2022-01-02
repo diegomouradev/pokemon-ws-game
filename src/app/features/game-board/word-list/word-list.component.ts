@@ -17,8 +17,7 @@ export class WordListComponent  {
 
 
   constructor(private generateNewGamBoardService: GenerateNewGameBoardService,
-    private wordService: WordService,
-    private canvasService: DrawOnCanvasService) { }
+    private wordService: WordService) { }
 
   pokeList$ = this.generateNewGamBoardService.pokeData$
 
@@ -27,17 +26,17 @@ export class WordListComponent  {
     distinctUntilKeyChanged('coordinates'),
     mergeScan( (acc, pokeTile) => pokeTile.letter === '' ? of(pokeTile.letter) : of(acc + pokeTile.letter), this.seed),
     withLatestFrom(this.pokeList$),
-    tap(result => console.log(result)),
-    map( ([pokeWordSoFar, pokeList]) => pokeList.map( pokemon => {
-              if(pokemon.word === pokeWordSoFar && pokemon.isFound === false) {
-                pokemon.isFound = true;
-                this.wordService.emitWordFound(pokemon);
-                this.wordService.resetPokeWordSubject();
-                return pokemon;
-              } else {
-                return pokemon
-              };
-            })
-        ),
+    map( ([pokeWordSoFar, pokeList]) => 
+    pokeList.map( pokemon => {
+      if(pokemon.word === pokeWordSoFar && pokemon.isFound === false) {
+        pokemon.isFound = true;
+        this.wordService.resetPokeWordSubject();
+        return pokemon;
+      } else {
+        return pokemon
+      };
+      })
+    ),
   )
+
 }

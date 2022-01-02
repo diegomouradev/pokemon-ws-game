@@ -66,19 +66,11 @@ ngAfterViewInit(): void {
       this.wordService.resetPokeWordSubject();
     }
       );
-
-    // this.canvasService.wordSofar$.subscribe( result => {
-
-    //   this.pokeWordAfterReset = {letter: `${result.slice(0, -1)}`, coordinates: {x: null , y: null }, wordLength: null, letterIndex: null};
-    //   this.wordService.emitIPokeTile(this.pokeWordAfterReset);
-    // })
-      
-      // this.wordService.resetPokeWordSubject();
   }
 
   ngOnDestroy(): void {
     this.pokeCoorSub.unsubscribe();
-    this.resetLetterSub.unubscribe();
+    this.resetLetterSub.unsubscribe();
   } 
 
 

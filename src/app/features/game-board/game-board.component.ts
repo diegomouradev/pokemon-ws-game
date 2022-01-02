@@ -1,5 +1,6 @@
 import { Component, Output} from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
+import { debug, RxJsLoggingLevel } from 'src/app/shared/operators/debug.operator';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { GenerateNewGameBoardService } from './services/game-board.service';
 
@@ -17,7 +18,6 @@ export class GameBoardComponent  {
 
   constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
     private gameDataService: GameDataService) {
-  
     }
 
   pokeData$ = this.gameDataService.pokeData$
@@ -27,6 +27,7 @@ export class GameBoardComponent  {
         return this.generateNewGameBoardService.buildGameBoard(pokeData);
       }
     ),
+    debug(RxJsLoggingLevel.INFO, "pokeData"),
     catchError( err => this.errorMessage = err)
   )
 
