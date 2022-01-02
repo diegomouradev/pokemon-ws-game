@@ -9,7 +9,8 @@ export class WordService {
 
   constructor() { }
   wordFound$: Observable<IPokeTile>
-  pokeWordInitialValue = {letter: '' , wordLength: 0, letterIndex: 0}
+  pokeWordInitialValue = {letter: '', coordinates: {x: null , y: null }, wordLength: null, letterIndex: null};
+
 
   private pokeWordSubject = new BehaviorSubject<IPokeTile>(this.pokeWordInitialValue);
   pokeWordAction$ = this.pokeWordSubject.asObservable();

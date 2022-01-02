@@ -36,3 +36,49 @@
     grid-row: 1/2;
 
 }
+
+
+.game-btn {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  width: min-content;
+  height: min-content;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 10px;
+  padding: 10px 10px;
+  border-radius: 10px;
+ 
+  box-shadow: 1px 1px 8px rgb(37 37 37 / 50%);
+  transition: all 0.2s ease-in-out;
+  border: none;
+  justify-self: center;
+  margin-top: 10px;
+  line-height: 1.2;
+}
+
+.game-btn:disabled,
+button[disabled] {
+  background-color: transparent;
+  border: 1px solid rgba(37, 37, 37, 0.2);
+  color: rgba(37, 37, 37, 0.2);
+  text-shadow: none;
+}
+
+.game-btn:not(:disabled) {
+  background-color: #fbab7e;
+  background-image: linear-gradient(
+    62deg,
+    #fbab7e 0%,
+    #f7ce68 43%,
+    #ffffff 100%
+  );
+  color: black;
+}
+
+.game-btn:hover:not(:disabled) {
+  transform: translateY(-5px);
+}
+
+.game-btn:active {
+  transform: translateY(0px);
+}
