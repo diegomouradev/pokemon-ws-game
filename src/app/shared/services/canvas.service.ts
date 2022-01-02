@@ -7,6 +7,7 @@ import { IPokeTile } from '../interfaces/IPokeTile';
   providedIn: 'root'
 })
 export class DrawOnCanvasService {
+  wordSofar$;
 
   constructor() { }
 
@@ -37,7 +38,15 @@ export class DrawOnCanvasService {
   
   }
 
-  resetSelection(ctx, canvasHeight, canvasWidth, coors): void {
-    
+  resetSelection(ctx, canvasWidth, canvasHeight, coordinates): void {
+    for(let coors of coordinates) {
+
+      const multiplierX = canvasWidth / 20;
+      const multiplierY = canvasHeight / 20;
+  
+      const x = coors.x * multiplierX ;
+      const y = coors.y * multiplierY ;
+      ctx.clearRect(x,y,20,20)
+    }
   }
 }

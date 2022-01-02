@@ -30,9 +30,9 @@
 }
 
 .found {
-    filter: grayscale(1);
+    filter: grayscale(0);
 }
 
 .not-found {
-    filter: grayscale(0);
+    filter: grayscale(1);
 }

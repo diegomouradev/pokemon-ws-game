@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {  of } from 'rxjs';
-import { map, mergeScan, tap, withLatestFrom } from 'rxjs/operators';
+import {  Observable, of } from 'rxjs';
+import { distinctUntilKeyChanged, map, mergeScan, skip, tap, withLatestFrom } from 'rxjs/operators';
+import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
 
 import { WordService } from 'src/app/shared/services/word.service';
 import { GenerateNewGameBoardService } from '../services/game-board.service';
@@ -14,13 +15,16 @@ export class WordListComponent  {
   errorMessage;
   seed: string = "";
 
+
   constructor(private generateNewGamBoardService: GenerateNewGameBoardService,
-    private wordService: WordService) { }
+    private wordService: WordService,
+    private canvasService: DrawOnCanvasService) { }
 
   pokeList$ = this.generateNewGamBoardService.pokeData$
 
   isPokeWordFound$ = this.wordService.getPokeWordActionObservable()
   .pipe(
+    distinctUntilKeyChanged('coordinates'),
     mergeScan( (acc, pokeTile) => pokeTile.letter === '' ? of(pokeTile.letter) : of(acc + pokeTile.letter), this.seed),
     withLatestFrom(this.pokeList$),
     tap(result => console.log(result)),
