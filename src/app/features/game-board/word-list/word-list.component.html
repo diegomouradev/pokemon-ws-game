@@ -1,13 +1,16 @@
-<div class="word-list__wrapper" *ngIf="isPokeWordFound$ | async as pokeList">
+<div class="word-list__wrapper" *ngIf="isPokeWordFound$ | async as pokeList; else loading">
         <ul class="word-list word-list__left" >
             <li *ngFor="let pokemon of pokeList, index as indexEven">
-                <img *ngIf="indexEven % 2 === 0" width="60px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
+                <img *ngIf="indexEven % 2 === 0 && !toggleWordList" width="60px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
+                <span *ngIf="indexEven % 2 === 0 && toggleWordList" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">{{pokemon.word}}</span>
             </li>
         </ul>
     
         <ul class="word-list word-list__right" >
             <li *ngFor="let pokemon of pokeList, index as indexOdd">
-                <img *ngIf="indexOdd % 2 === 1" width="60px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
+                <img *ngIf="indexOdd % 2 === 1 && !toggleWordList" width="60px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
+                <span *ngIf="indexOdd % 2 === 1 && toggleWordList" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">{{pokemon.word}}</span>
             </li>
         </ul>
 </div>
+<ng-template #loading>loading...</ng-template>

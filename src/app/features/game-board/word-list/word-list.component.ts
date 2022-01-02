@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import {  Observable, of } from 'rxjs';
 import { distinctUntilKeyChanged, map, mergeScan, skip, tap, withLatestFrom } from 'rxjs/operators';
 import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
@@ -11,13 +12,18 @@ import { GenerateNewGameBoardService } from '../services/game-board.service';
   templateUrl: './word-list.component.html',
   styleUrls: ['./word-list.component.scss']
 })
-export class WordListComponent  {
+export class WordListComponent implements OnInit{
   errorMessage;
   seed: string = "";
 
+  @Input() toggleWordList;
 
   constructor(private generateNewGamBoardService: GenerateNewGameBoardService,
     private wordService: WordService) { }
+
+  ngOnInit(): void {
+   
+  }
 
   pokeList$ = this.generateNewGamBoardService.pokeData$
 

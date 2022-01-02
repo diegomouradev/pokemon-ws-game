@@ -36,3 +36,14 @@
 .not-found {
     filter: grayscale(1);
 }
+
+span.found {
+    text-decoration: line-through;
+}
+
+span.not-found {
+    filter: unset;
+}
+span {
+    margin: 0 1rem;
+}

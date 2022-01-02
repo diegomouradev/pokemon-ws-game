@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { GameBoardRoutingModule } from './game-board-routing.module';
 import { GameBoardComponent } from './game-board.component';
@@ -13,7 +14,7 @@ import { WordListComponent } from './word-list/word-list.component';
 
 @NgModule({
   declarations: [GameBoardComponent, BoardTileComponent, BoardCanvasComponent, WordListComponent ],
-  imports: [CommonModule, GameBoardRoutingModule],
+  imports: [CommonModule, GameBoardRoutingModule, ReactiveFormsModule],
   exports: [],
   providers: [GenerateNewGameBoardService]
 })

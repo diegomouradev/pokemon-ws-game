@@ -3,7 +3,9 @@
 
   
     <main class="main-grid">
-      <app-word-list class="word-list__wrapper" ></app-word-list>
+      
+        <app-word-list class="word-list__wrapper" [toggleWordList]="form$ | async"></app-word-list>
+      
 
       <div #gameBoardEl class="game-board" >
 
@@ -14,7 +16,14 @@
         </div>
 
       </div>
-      <button class="game-btn" (click)="canvas.resetSelection()">Undo Selection</button>
+      <form [formGroup]="form" id="settingsForm">
+        <div class="settings-form__feature-wrapper">
+          <label for="toggleWordList">Show Pokemon Names</label>
+          <input id="toggleWordList" type="checkbox" formControlName="toggleWordList" [value]="form.value.toggleWordList">
+        </div>
+
+        <button class="game-btn" (click)="canvas.resetSelection()">Undo Selection</button>
+      </form>
     </main>
 
 </ng-container>

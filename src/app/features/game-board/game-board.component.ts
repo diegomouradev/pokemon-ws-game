@@ -1,5 +1,7 @@
-import { Component, Output} from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
+import { Component, OnInit, Output} from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { of } from 'rxjs';
+import { catchError, defaultIfEmpty, map, startWith, tap } from 'rxjs/operators';
 import { debug, RxJsLoggingLevel } from 'src/app/shared/operators/debug.operator';
 import { GameDataService } from 'src/app/shared/services/game-data.service';
 import { GenerateNewGameBoardService } from './services/game-board.service';
@@ -12,13 +14,24 @@ import { GenerateNewGameBoardService } from './services/game-board.service';
 export class GameBoardComponent  {
   errorMessage: string;
 
-  @Output() isEven = 'even';
-  @Output() isOdd = 'odd';
+  form = new FormGroup({
+      "toggleWordList": new FormControl(false)
+  })
 
+  @Output() form$ = this.form.valueChanges.pipe(
+    defaultIfEmpty({toggleWordList: false}),
+    map(changes => changes.toggleWordList),
+    tap(result => console.log(result))
+  )
 
+    
   constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
     private gameDataService: GameDataService) {
     }
+
+  // ngOnInit(): void {
+  //   this.form$ = of(this.form$);
+  // }
 
   pokeData$ = this.gameDataService.pokeData$
   gameBoard$ = this.pokeData$.pipe(
@@ -29,8 +42,6 @@ export class GameBoardComponent  {
     ),
     debug(RxJsLoggingLevel.INFO, "pokeData"),
     catchError( err => this.errorMessage = err)
-  )
-
- 
+  )  
   
 }
