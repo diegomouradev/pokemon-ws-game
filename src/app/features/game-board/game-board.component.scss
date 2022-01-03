@@ -1,21 +1,28 @@
 .main-grid {
+  height: 100vh;
   display: grid;
-  grid-template-columns: .5fr 1fr .5fr;
-  grid-template-rows:  1fr;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows:  1fr min-content;
+  align-items: flex-start;
   justify-content: center;
+  padding: 5rem 3rem;
+  gap: 3rem;
+}
 
+app-word-list {
+  grid-column: 2/3;
+  grid-row: 1/-1;
 }
 
 .game-board {
-  grid-column: 1/-1;
+  grid-column: 1/2;
   grid-row: 1/2;
   position: relative;
   z-index: 10;
   background-color: transparent;
-  border: 0.1px solid black;
+  
   justify-self: center;
-  border-radius: 10px;
+  border-radius: 1rem;
   overflow: hidden;
 
   &__row {
@@ -25,22 +32,26 @@
   }
 
   &__tile {
-    padding: 6px;
-   
+    color: wheat;
+    text-shadow: 2px 2px 5px rgb(0 0 0 / 70%);
+    padding: .7rem;
   }
+
+}
+
+.hide-checkbox{
+  appearance: none;
+  width: 0;
+  height: 0;
 }
 
 .word-list__wrapper {
-  
     grid-column: 1/-1;
     grid-row: 1/2;
-
 }
 
 
 .game-btn {
-  grid-column: 2/3;
-  grid-row: 2/3;
   width: min-content;
   height: min-content;
   font-family: "Press Start 2P", sans-serif;
@@ -81,4 +92,9 @@ button[disabled] {
 
 .game-btn:active {
   transform: translateY(0px);
+}
+
+.settings-form {
+  grid-column: 2/3;
+  grid-row: 2/3;
 }

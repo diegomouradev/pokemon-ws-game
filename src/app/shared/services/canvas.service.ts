@@ -21,7 +21,7 @@ export class DrawOnCanvasService {
   draw(ctx, canvasHeight, canvasWidth, coors): void {
     ctx.beginPath();
 
-    const lineargradient = ctx.createLinearGradient(0, 0, 120, 120);
+    const lineargradient = ctx.createLinearGradient(0, 0, 600, 600);
     lineargradient.addColorStop(0, '#21D4FD');
     lineargradient.addColorStop(1, '#B721FF');
     ctx.fillStyle = lineargradient;
@@ -31,16 +31,16 @@ export class DrawOnCanvasService {
     const multiplierX = canvasWidth / 20;
     const multiplierY = canvasHeight / 20;
 
-    const x = coors.at(-1).x * multiplierX + 9.7;
-    const y = coors.at(-1).y * multiplierY + 10;
-    const radius = 10;
+    const x = coors.at(-1).x * multiplierX + 15;
+    const y = coors.at(-1).y * multiplierY + 15;
+    const radius = 15;
     const startAngle = 0;
     const endAngle =  2 * Math.PI;
     const clockwise = true;
 
     ctx.arc( x, y, radius, startAngle, endAngle, clockwise);
     ctx.fill();
-    ctx.stroke();
+    // ctx.stroke();
   
   }
 
@@ -52,7 +52,7 @@ export class DrawOnCanvasService {
   
       const x = coors.x * multiplierX ;
       const y = coors.y * multiplierY ;
-      ctx.clearRect(x,y,20,20)
+      ctx.clearRect(x,y,30,30)
     }
   }
 }

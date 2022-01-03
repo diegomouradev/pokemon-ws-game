@@ -9,9 +9,6 @@ import { BoardCanvasComponent } from './board-canvas/board-canvas.component';
 import { GenerateNewGameBoardService } from './services/game-board.service';
 import { WordListComponent } from './word-list/word-list.component';
 
-
-
-
 @NgModule({
   declarations: [GameBoardComponent, BoardTileComponent, BoardCanvasComponent, WordListComponent ],
   imports: [CommonModule, GameBoardRoutingModule, ReactiveFormsModule],

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output} from '@angular/core';
+import { Component, Output} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { of } from 'rxjs';
 import { catchError, defaultIfEmpty, map, startWith, tap } from 'rxjs/operators';
@@ -26,12 +26,7 @@ export class GameBoardComponent  {
 
     
   constructor(private generateNewGameBoardService: GenerateNewGameBoardService,
-    private gameDataService: GameDataService) {
-    }
-
-  // ngOnInit(): void {
-  //   this.form$ = of(this.form$);
-  // }
+    private gameDataService: GameDataService) {}
 
   pokeData$ = this.gameDataService.pokeData$
   gameBoard$ = this.pokeData$.pipe(
@@ -40,7 +35,6 @@ export class GameBoardComponent  {
         return this.generateNewGameBoardService.buildGameBoard(pokeData);
       }
     ),
-    debug(RxJsLoggingLevel.INFO, "pokeData"),
     catchError( err => this.errorMessage = err)
   )  
   
