@@ -1,11 +1,15 @@
-@import '../game-board.component.scss';
+@import "../game-board.component.scss";
 
-.game-board__tile {
- 
-    color: black;
-}
-.game-board__tile:hover {
+.game-board {
+  &__tile {
+    color: wheat;
+    text-shadow: 2px 2px 5px rgb(0 0 0 / 70%);
+    padding: 0.7rem;
+  }
+
+  &__tile:hover {
     background-color: wheat;
     box-shadow: 1px 1px 2px black;
     border-radius: 10px;
+  }
 }

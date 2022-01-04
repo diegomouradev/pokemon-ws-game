@@ -2,7 +2,7 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows:  1fr min-content;
+  grid-template-rows: 1fr min-content;
   align-items: flex-start;
   justify-content: center;
   padding: 5rem 3rem;
@@ -20,7 +20,7 @@ app-word-list {
   position: relative;
   z-index: 10;
   background-color: transparent;
-  
+
   justify-self: center;
   border-radius: 1rem;
   overflow: hidden;
@@ -30,26 +30,18 @@ app-word-list {
     justify-content: space-evenly;
     align-items: center;
   }
-
-  &__tile {
-    color: wheat;
-    text-shadow: 2px 2px 5px rgb(0 0 0 / 70%);
-    padding: .7rem;
-  }
-
 }
 
-.hide-checkbox{
+.hide-checkbox {
   appearance: none;
   width: 0;
   height: 0;
 }
 
 .word-list__wrapper {
-    grid-column: 1/-1;
-    grid-row: 1/2;
+  grid-column: 1/-1;
+  grid-row: 1/2;
 }
-
 
 .game-btn {
   width: min-content;
@@ -58,7 +50,7 @@ app-word-list {
   font-size: 10px;
   padding: 10px 10px;
   border-radius: 10px;
- 
+
   box-shadow: 1px 1px 8px rgb(37 37 37 / 50%);
   transition: all 0.2s ease-in-out;
   border: none;

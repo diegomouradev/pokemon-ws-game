@@ -1,12 +1,31 @@
-<ng-container  *ngIf="isPokeWordFound$ | async as pokeList; else loading">
-        <ul [class.word-list-images]="!toggleWordList" [class.word-list-words]="toggleWordList">
-            <li class="word-list__item" *ngFor="let pokemon of pokeList, index as indexEven">
-                <img class="word-list-images__image-item" *ngIf="!toggleWordList"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.word-list-images__image-item--is-found]="pokemon.isFound"  [class.word-list-images__image-item--not-found]="!pokemon.isFound">
-                <span class="word-list-words__word-item" *ngIf="toggleWordList" [class.word-list-words__word-item--is-found]="pokemon.isFound"  [class.word-list-words__word-item--not-found]="!pokemon.isFound">{{pokemon.word}}</span>
-            </li>
-        </ul>
-    
-        <!-- <ul class="word-list word-list__right" >
+<ng-container *ngIf="isPokeWordFound$ | async as pokeList">
+  <ul
+    [class.word-list-images]="!toggleWordList"
+    [class.word-list-words]="toggleWordList"
+  >
+    <li
+      class="word-list__item"
+      *ngFor="let pokemon of pokeList; index as indexEven"
+    >
+      <img
+        class="word-list-images__image-item"
+        *ngIf="!toggleWordList"
+        [src]="pokemon.urlSvg"
+        [alt]="pokemon.word"
+        [class.word-list-images__image-item--is-found]="pokemon.isFound"
+        [class.word-list-images__image-item--not-found]="!pokemon.isFound"
+      />
+      <span
+        class="word-list-words__word-item"
+        *ngIf="toggleWordList"
+        [class.word-list-words__word-item--is-found]="pokemon.isFound"
+        [class.word-list-words__word-item--not-found]="!pokemon.isFound"
+        >{{ pokemon.word }}</span
+      >
+    </li>
+  </ul>
+
+  <!-- <ul class="word-list word-list__right" >
             <li *ngFor="let pokemon of pokeList, index as indexOdd">
                 <img *ngIf="indexOdd % 2 === 1 && !toggleWordList" width="60px"  [src]="pokemon.urlSvg" [alt]="pokemon.word" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">
                 <span *ngIf="indexOdd % 2 === 1 && toggleWordList" [class.found]="pokemon.isFound"  [class.not-found]="!pokemon.isFound">{{pokemon.word}}</span>
