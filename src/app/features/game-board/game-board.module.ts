@@ -8,9 +8,10 @@ import { BoardTileComponent } from './board-tile/board-tile.component';
 import { BoardCanvasComponent } from './board-canvas/board-canvas.component';
 import { GenerateNewGameBoardService } from './services/game-board.service';
 import { WordListComponent } from './word-list/word-list.component';
+import { WordListToggleComponent } from './word-list-toggle/word-list-toggle.component';
 
 @NgModule({
-  declarations: [GameBoardComponent, BoardTileComponent, BoardCanvasComponent, WordListComponent ],
+  declarations: [GameBoardComponent, BoardTileComponent, BoardCanvasComponent, WordListComponent, WordListToggleComponent ],
   imports: [CommonModule, GameBoardRoutingModule, ReactiveFormsModule],
   exports: [],
   providers: [GenerateNewGameBoardService]
