@@ -53,7 +53,10 @@ export class BoardCanvasComponent implements AfterViewInit, OnDestroy {
   pokeCoorSub = this.wordService
     .getPokeWordActionObservable()
     .pipe(
+      /*- skip: The first value is the initialValue used for reset. */
       skip(1),
+      /*- mergeScan: Keep accumulating until the last letter, or
+      reset to an empty array. */
       mergeScan(
         (acc, pokeTile) =>
           pokeTile.letterIndex + 1 <= pokeTile.wordLength
@@ -64,9 +67,15 @@ export class BoardCanvasComponent implements AfterViewInit, OnDestroy {
       tap((result) => {
         return console.log(result);
       }),
+
+      /* Copy of coordinates for erasing 
+      the last drawing on the canvas, upon request.
+      */
       tap((result) => (this.coordinatesSoFar$ = of(result)))
     )
     .subscribe((coor) => {
+      /* If coordinates exist, draw them on the canvas.
+       */
       coor[0]
         ? this.canvasService.draw(
             this.ctx,
@@ -91,6 +100,9 @@ export class BoardCanvasComponent implements AfterViewInit, OnDestroy {
   }
 
   public resetSelection() {
+    /* On user input erase the previous selection,
+    that didn't form a world.
+     */
     this.resetLetterSub = this.coordinatesSoFar$
       .pipe()
       .subscribe((coordinates) => {
