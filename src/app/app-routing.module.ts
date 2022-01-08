@@ -10,6 +10,7 @@ const routes: Routes = [
         (m) => m.GameBoardModule
       ),
   },
+  { path: 'word-list', loadChildren: () => import('./word-list/word-list.module').then(m => m.WordListModule) },
 
 
 ];
