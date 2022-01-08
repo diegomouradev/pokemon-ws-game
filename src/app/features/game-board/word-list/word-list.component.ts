@@ -1,21 +1,11 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { of } from 'rxjs';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import {
-  defaultIfEmpty,
   distinctUntilKeyChanged,
   map,
   mergeScan,
-  skip,
-  tap,
   withLatestFrom,
 } from 'rxjs/operators';
-import { DrawOnCanvasService } from 'src/app/shared/services/canvas.service';
 
 import { WordService } from 'src/app/shared/services/word.service';
 import { GenerateNewGameBoardService } from '../services/game-board.service';
