@@ -5,13 +5,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./login-module/login-module.module').then(
-        (m) => m.LoginModuleModule
-      ),
-  },
-  {
-    path: 'game',
-    loadChildren: () =>
       import('./features/game-board/game-board.module').then(
         (m) => m.GameBoardModule
       ),
