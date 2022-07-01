@@ -4,12 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './components/header/header.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { AuthModule } from './core/auth/auth.module';
 
 @NgModule({
-	declarations: [AppComponent],
-	imports: [BrowserModule, AppRoutingModule, HttpClientModule, SharedModule],
+	declarations: [AppComponent, HeaderComponent, HomepageComponent],
+	imports: [BrowserModule, AppRoutingModule, AuthModule],
 	providers: [],
 	bootstrap: [AppComponent],
 })

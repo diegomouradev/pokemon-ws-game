@@ -1,0 +1,28 @@
+@import '../../../../styles/sass/main.scss';
+label {
+	display: none;
+}
+
+input {
+	border: 0.1rem solid wheat;
+	border-radius: 5rem;
+	padding: 1rem 3rem;
+	background-color: rgba(245, 222, 179, 0.9);
+	margin-bottom: 1.5rem;
+	box-shadow: $shadow;
+}
+
+.auth {
+	&__login-form {
+		display: flex;
+		justify-content: space-around;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+.auth__login-form button,
+button {
+	@extend .btn;
+	margin-top: 0;
+}

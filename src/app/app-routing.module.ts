@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('./features/game-board/game-board.module').then(
-        (m) => m.GameBoardModule
-      ),
-  },
+	// {
+	// 	path: '',
+	// 	component: HomepageComponent,
+	// },
+	{
+		path: '',
+		loadChildren: () => import('./features/game-board/game-board.module').then((m) => m.GameBoardModule),
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
 })
 export class AppRoutingModule {}
