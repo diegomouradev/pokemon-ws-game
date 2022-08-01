@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+a,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+input,
+textarea {
+  background-color: transparent;
+  border: unset;
+  outline: unset;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+html {
+  font-family: $defaultFont;
+  font-size: 62.5%; //1 rem == 10px
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(309deg,#0093e9,#80d0c7);
+}

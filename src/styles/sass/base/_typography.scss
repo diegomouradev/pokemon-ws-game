@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+/* You can add global styles to this file, and also import other style files */
+
+.heading-primary {
+    font-family: inherit;
+    font-size: 3.2rem;
+    margin: 0px;
+    color: wheat;
+    text-shadow: 1px 1px 2px black;
+}
+
+.heading-secondary {
+    font-family: inherit;
+    font-size: 2.2rem;
+    margin: 0px;
+    color: wheat;
+    text-shadow: 1px 1px 2px black;
+}
+
+p {
+    font-family: inherit;
+    color: $black;
+    font-size: 1.4rem;
+}

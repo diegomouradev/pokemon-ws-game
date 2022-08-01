@@ -1,0 +1,16 @@
+<form *ngIf="isLoggedOut$ | async" class="auth__login-form" [formGroup]="loginForm">
+	<div class="auth__login-form--field-wrapper">
+		<label for="email-input">Email</label>
+		<input formControlName="email" type="email" placeholder="Email" />
+	</div>
+	<div class="auth__login-form--field-wrapper">
+		<label for="password-input">Password</label>
+		<input formControlName="password" type="text" placeholder="Password" />
+	</div>
+	<button type="submit" (click)="onLogIn()">Login</button>
+</form>
+<div *ngIf="isLoggedIn$ | async">
+	<span *ngIf="user$ | async as user">Hi {{ user.email }} you are logged in!</span>
+	<button type="submit" (click)="onLogOut()">Logout</button>
+</div>
+

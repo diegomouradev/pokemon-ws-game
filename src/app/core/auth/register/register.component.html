@@ -1,0 +1,18 @@
+<form *ngIf="isLoggedOut$ | async" class="auth__login-form" [formGroup]="loginForm">
+	<div class="auth__login-form--field-wrapper">
+		<label for="email-input">Email</label>
+		<input formControlName="email" type="email" placeholder="Email" />
+	</div>
+	<div class="auth__login-form--field-wrapper">
+		<label for="password-input">Password</label>
+		<input formControlName="password" type="text" placeholder="Password" />
+	</div>
+	<div class="auth__login-form--field-wrapper">
+		<label for="password-input">Confirm Password</label>
+		<input formControlName="passwordConfirm" type="text" placeholder="Confirm Password" />
+	</div>
+	<button type="submit" (click)="onRegister()">Register</button>
+</form>
+<div *ngIf="userCreated$ | async">
+	<span>User {{ userCreated$.email | json }} created!</span>
+</div>

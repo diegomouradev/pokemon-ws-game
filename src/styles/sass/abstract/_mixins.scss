@@ -1,0 +1,31 @@
+@mixin respond($breakpoint) {
+    @if $breakpoint == wid-1440 {
+      @media (max-width: 90em) {
+        @content;
+      }
+    }
+  
+    @if $breakpoint == wid-900 {
+      @media (max-width: 56.25em) {
+        @content;
+      }
+    }
+  
+    @if $breakpoint == wid-600 {
+      @media (max-width: 37.5em) {
+        @content;
+      }
+    }
+  
+    @if $breakpoint == wid-400 {
+      @media (max-width: 25em) {
+        @content;
+      }
+    }
+  
+    @if $breakpoint == wid-1920-more {
+      @media (min-width: 120em) {
+        @content;
+      }
+    }
+  }

@@ -1,0 +1,10 @@
+<form class="settings-form" [formGroup]="form" id="settingsForm">
+  <label class="word-list__toggle" for="toggleWordList">Toggle Name</label>
+  <input
+    class="hide-checkbox"
+    id="toggleWordList"
+    type="checkbox"
+    formControlName="toggleWordList"
+    [value]="form.value.toggleWordList"
+  />
+</form>

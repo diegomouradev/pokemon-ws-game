@@ -1,0 +1,20 @@
+<ng-container *ngIf="gameBoard$ | async as gameBoard">
+  <main class="main-grid">
+    <app-word-list></app-word-list>
+    <button
+      class="game-board__reset-selection"
+      (click)="canvas.resetSelection()"
+    >
+      Undo Selection
+    </button>
+    <div #gameBoardEl class="game-board">
+      <app-board-canvas #canvas [gameBoardEl]="gameBoardEl"></app-board-canvas>
+      <div class="game-board__row" *ngFor="let rows of gameBoard">
+        <app-board-tile
+          *ngFor="let tile of rows"
+          [tile]="tile"
+        ></app-board-tile>
+      </div>
+    </div>
+  </main>
+</ng-container>
